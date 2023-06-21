@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Add_new_part</h3><br>
+
+
+
+
+
+
+
+
+<form method="POST" class="col bg-light col-md-8 col-mb-4 "  >
+    {% csrf_token %}
+    
+     <!-- Radio button for devices -->
+     <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label" ><strong>Select Device Type </strong></label>
+
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+          {% for device in device_context %}
+          
+          <input required type="radio" class="btn-check" onclick=make_dropdown_{{device.devices}}() name="device_mobile" value="{{device.devices}}" id="{{device.get_id}}" autocomplete="off" >
+          {% comment %} line 31 id="{{device.get_id}}" get_id came from models to shpw specific id for device  {% endcomment %}
+          <!--line 30 id should be unique when we pass variables in the id it wil get uniqe name -->
+          
+
+          <label class="btn btn-outline-primary" for = "{{device.get_id}}" >{{device.devices}}</label>
+          {% comment %} line 40 my_dropdown_{{device.devices}}  device.devices will pick each button on forloop{% endcomment %}
+          <!-- in line 49 first comes from for loop variable and 2nd make comes from models fields/column -->
+          <script>
+            function make_dropdown_{{device.devices}}(){  
+              var id = document.getElementById('make_list');
+              
+              id.innerHTML -= '<option>Select Make</option>{% for make in make_context %}{% if make.device.id == 6 %}<option value="{{make.make}}"></option>{% endif %}{% endfor %}'
+
+              id.innerHTML += '<option>Select Make</option>{% for make in make_context %}{% if make.device.id == device.get_id %}<option value="{{make.make}}"></option>{% endif %}{% endfor %}'
+              
+              
+              
+            
+            }
+          
+          
+          </script>
+          {% endfor %}
+        
+         
+        </div> 
+        
+      </div>
+
+
+
+
+
+
+
+
+
+
+    
+     <!-- dropdown menu for Make and this div s  -->
+    <div class="mb-3" id="mobile_div" >
+        <label for="exampleInputEmail1" class="form-label"><strong>Make </strong> {{part_context.make.make }}</label>
+        <input required list="make_list" name = "make_name" class="form-control" id="make_mobile" aria-describedby="emailHelp">
+        <datalist id="make_list" >
+            {% for make_context in make_context %}
+            
+            <option value="{{ make_context.make }}"> {{ make_context.make }}</option>
+            {% endfor %}
+           
+      </datalist>
+    </div>
+   
+
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"><strong> Model </strong></label>
+        <input required list="model_list" name = "model_name" class="form-control" id="model" aria-describedby="emailHelp">
+        <datalist id="model_list" >
+          {% for model in model_context %}
+          <option value="{{model.model}}"> {{model.model}} </option>
+
+          {% endfor %}
+          
+      </datalist>
+      </div>
+
+
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"><strong> Part Name </strong></label>
+        <input required list="part_name_list" name = "part_name" class="form-control" id="part_name_id" aria-describedby="emailHelp">
+        <datalist id="part_name_list" >
+          {% for part_name in part_name_context %}
+          <option value="{{part_name.part_name}}"> {{ part_name.part_name }} </option>
+
+          {% endfor %}
+          
+      </datalist>
+      </div>
+
+
+
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"><strong> Colour </strong></label>
+        <input required list="colour_list" name = "colour_name" class="form-control" id="colour_id" aria-describedby="emailHelp">
+        <datalist id="colour_list" >
+          {% for colour in colour_context %}
+          <option value="{{colour.colour}}"> {{colour.colour}} </option>
+
+          {% endfor %}
+          
+      </datalist>
+      </div>
+
+
+
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"><strong> Supplier </strong></label>
+        <input required list="supplier_list" name = "supplier_name" class="form-control" id="supplier_id" aria-describedby="emailHelp">
+        <datalist id="supplier_list" >
+          {% for supplier in supplier_context %}
+          <option value="{{supplier.supplier}}"> {{supplier.supplier}} </option>
+
+          {% endfor %}
+          
+      </datalist>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"> <strong> Quantity </strong></label>
+        <input required type="number" name = "quantity_name" class="form-control" id="quantity_id" >
+
+      </div>
+
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"> <strong> Cost </strong></label>
+        <input required type="number" name = "cost_name" class="form-control" id="cost_id" >
+
+      </div>
+
+     <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"><strong> Part Status </strong></label>
+        <input required list="part_status_list" name = "part_status_name" class="form-control" id="part_status_id" >
+        <datalist id="part_status_list" >
+          {% for status in part_status_context %}
+          <option value="{{status.p_status}} "> {{status.p_status}} </option>
+
+          {% endfor %}
+          
+      </datalist>
+      </div> 
+
+       <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"><strong> Select part status </strong></label>
+        <input required list="part_status" name = "part_status" class="form-control" id="part_status_id">
+        <datalist id="part_status" >
+          {% for part_status in part_status_context %}
+          <option value="{{part_status.p_status}}"> {{part_status.p_status}} </option>
+
+          {% endfor %}
+          
+      </datalist>
+      </div> 
+
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+
+      
+
+      
+   
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

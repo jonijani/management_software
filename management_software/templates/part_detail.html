@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Part details </h3>
+
+<div class="col border border-dark bg-light col-md-4 ">
+<table >
+
+    <tr>
+        <td></td>
+        
+    </tr>
+    <tr>
+        <td>Part NO :   </td>
+        <td><a href="{% url 'update_part' part_detail_context.id %}">{{part_detail_context.id}}</a></td>
+        <td><a href="{% url 'update_part' part_detail_context.id %}">Update</a></td>
+       
+    </tr>
+
+    <tr>
+        <td>Device :   </td>
+        <td>{{part_detail_context.devices}}</td>
+    </tr>
+ 
+    <tr>
+        <td>Make :   </td>
+        <td>{{part_detail_context.make}}</td>
+    </tr>
+
+    <tr>
+        <td>Model :   </td>
+        <td>{{part_detail_context.model}}</td>
+    </tr>
+
+    <tr>
+        <td>Part Name :   </td>
+        <td>{{part_detail_context.part_name}}</td>
+    </tr>
+
+    <tr>
+        <td>Colour :   </td>
+        <td>{{part_detail_context.part_colour}}</td>
+    </tr>
+
+    <tr>
+        <td>Supplier   </td>
+        <td>{{part_detail_context.supplier}}</td>
+    </tr>
+
+    <tr>
+        <td>Quantity :   </td>
+        <td>{{part_detail_context.quantity}}</td>
+    </tr>
+
+    <tr>
+        <td>Cost :   </td>
+        <td>{{part_detail_context.cost}}</td>
+    </tr>
+
+    <tr>
+        <td>Created by :   </td>
+        <td>{{part_detail_context.created_by}}</td>
+    </tr>
+
+    <tr>
+        <td>Created on :   </td>
+        <td>{{part_detail_context.created_date}}</td>
+    </tr>
+
+    <tr>
+        <td>Part Status :   </td>
+       
+        {% comment %} put avilable in Green and allocated in red {% endcomment %}
+        <td> {{part_detail_context.part_status}} to JOB ID : <a href="{% url 'job_detail_page' part_detail_context.job  %}">{{part_detail_context.job}}  </a> </td>
+    </tr>
+
+</table>
+
+</div>
+
+<div class="col border border-dark bg-light col-md-4 pull-right ">
+
+    <td ><a href="/media/{{part_detail_context.barcode}}"> <img src="/media/{{part_detail_context.barcode}}"></a></td>
+    
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+

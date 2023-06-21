@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Sold accessories page </h3><br>
+
+<table class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2" >
+      
+    <tr style="border: 1px solid rgb(48, 45, 45);" width="95%" style="border: black;"  >
+        <th >ID No </th>
+        
+        <th>Device </th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Name</th>
+        <th>Colour</th>
+        <th>Supplier</th>
+        <th>price</th>
+        
+        <th>created date</th>
+        <th>created by</th>
+        
+    </tr>
+   
+    
+    {% comment %} <h3 style="color: red;">Search result for <strong> {{ searched }} </strong></h3> {% endcomment %}
+  {% for show_result in  sold_acc_context reversed %}
+
+    
+
+
+    <tr style="border: 2px solid black" >
+      
+ 
+            <td><a href="#">{{ show_result.id  }}</a></td>
+        
+            
+            <td>{{ show_result.retail_acc.devices }}</td>
+            
+            <td>{{ show_result.retail_acc.make }}</td>
+            <td>{{ show_result.retail_acc.model }}</td>
+            <td>{{ show_result.retail_acc.acce_name}}</td>
+            <td>{{ show_result.retail_acc.acce_colour }}</td>
+            <td>{{ show_result.retail_acc.supplier }}</td>
+            <td>{{ show_result.retail_price }}</td>   
+            
+            <td>{{ show_result.date }}</td>
+            <td>{{ show_result.user }}</td>
+            
+    </tr>
+    
+
+    {% endfor %} 
+
+</table>
+
+
+
+
+
+
+{% endblock %}

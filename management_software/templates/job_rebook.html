@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Job rebook page.html</h3>
+
+<form method="POST" action= "#">
+    {% csrf_token %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        
+         
+  
+  
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"> <strong> IMEI </strong></label>
+            <input type="text" value="{{j_rebook_context.imei}}" name = "imei" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  
+            
+            
+          </div>
+  
+          <!-- faults field starts here -->
+          <h6> <strong> Faults </strong></h6>
+          <div class="container ">
+            <div class="row">
+              {% for fault in fault_context %}
+              <div class="col">
+          
+          <div class="form-check mb-4 col-md-6">
+            <input class="form-check-input" name= "faults" type="checkbox" value="{{ fault.fault }}" id="faults_{{ fault.fault }}">
+            <label class="form-check-label" for="faults_{{ fault.fault }}">
+              {{ fault.fault }}
+            </label>
+          </div>
+        </div>
+        {% endfor %}
+            
+            </div>
+          </div>
+  
+          <!-- descrition starts here  -->
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"> <strong> Description </strong></label>
+            <textarea name = "description" class="form-control" id="descrition_id" ></textarea>
+  
+          </div>
+  
+  
+          
+  
+          <!-- Passcode field starts here  -->
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"> <strong> Passcode </strong></label>
+            <input type="text" name = "passcode" class="form-control" id="passcode" >
+  
+            
+            
+          </div>
+  
+          
+  
+  
+
+  
+  
+  
+        <!-- Passcode Cost starts here  -->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"> <strong> Cost </strong></label>
+          <input type="number" name = "cost" class="form-control" id="cost" >
+  
+          
+          
+        </div>
+  
+       
+  
+       
+  
+  
+  
+      <!-- Passcode ETA starts here  -->
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"> <strong>ETA </strong></label>
+        <input type="datetime-local" name = "eta" class="form-control" id="eta_id" >
+  
+        
+        
+      </div>
+
+
+
+      <div class="mb-3"  >
+          
+        <label for="job_status_list" class="form-label"> <strong> Job Status </strong></label>
+        <input list="job_status_list" name = "job_status" class="form-control" id="job_status_id" >
+        <datalist id="job_status_list" >
+          <option></option>
+          {% for job_status in job_status_context %}
+          <option value="{{job_status.job_status}}"></option>
+
+          {% endfor %}
+          
+      </datalist>
+
+
+    </div>
+  
+  
+  
+    <div class="mb-3"  >
+            
+      <label for="payment_status_list" class="form-label"> <strong> Payment Status </strong> </label>
+      <input list="payment_status_list" name = "payment_status" class="form-control" id="payment_status_id" >
+      <datalist id="payment_status_list" >
+        
+        <option value="PAID" ></option>
+        <option value="UNPAID"></option>
+        <option value="CREDIT NOTE"></option>
+        <option value="REFUND"></option>
+        
+        
+    </datalist>
+  
+  
+  </div> 
+  
+  
+  
+          
+  
+  
+  
+          
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="col">
+        
+      </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

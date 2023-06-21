@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Requested parts detail page </h3>
+
+<table>
+
+   
+    
+        <tr>
+            <td>Request Part ID :</td>
+            <td> {{ parts_requested_context.id }}</td>
+        </tr>
+
+
+        <tr>
+            <td>Related JOB ID  :</td>
+            <td><a href="{% url 'job_detail_page' parts_requested_context.job.id %}"> {{ parts_requested_context.job.id }} </a> </td>
+        </tr>
+
+        <form method="POST" action="{% url 'update_requested_part' parts_requested_context.id %}">
+            {% csrf_token %}
+         <tr>
+            <div value="{{ parts_requested_context.devices.devices}} ">
+                <td>Device  :</td>
+                <td> {{ parts_requested_context.devices.devices}}  </td>
+        </tr>
+            </div>
+
+
+
+        <tr>
+            <div value="{{ parts_requested_context.make.make}} ">
+                <td>Make  :</td>
+                <td> {{ parts_requested_context.make.make}}  </td>
+            </div>
+        </tr>
+
+
+
+        <tr>
+            <td>Model  :</td>
+            <td> {{ parts_requested_context.model.model}}  </td>
+        </tr>
+
+
+
+
+        <tr>
+            <td>Part Name :</td>
+            <td> {{ parts_requested_context.part_name }}</td>
+        </tr>
+
+
+
+        <tr>
+            <td>Colour  :</td>
+            <td> {{ parts_requested_context.part_colour.colour}}  </td>
+        </tr>
+
+
+
+        <tr>
+            <td>Supplier  :</td>
+            <td> {{ parts_requested_context.supplier.supplier}}  </td>
+        </tr>
+
+
+
+        <tr>
+            <td>Quantity  :</td>
+            <td> {{ parts_requested_context.quantity}}  </td>
+        </tr>
+
+       
+
+        <tr>
+            <td>Part Cost :</td>
+            <td> {{ parts_requested_context.buying_cost }}</td>
+        </tr>
+        
+
+        <tr>
+            <td>Description :</td>
+            <td> {{ parts_requested_context.part_description }}</td>
+        </tr>
+
+        <tr>
+            <td>Part Status :</td>
+            <td> {{ parts_requested_context.part_status }}</td>
+        </tr>
+
+        <tr>
+            <td>User  :</td>
+            <td> {{ parts_requested_context.created_by}}  </td>
+        </tr>
+
+        <tr>
+            <td>Time  :</td>
+            <td> {{ parts_requested_context.created_date}}  </td>
+        </tr> 
+        
+            <tr>
+                <td style="color: red;">Select Ordered:</td>
+                <td>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label"><strong> </strong></label>
+                        <input required list="part_status" name = "part_status_name1" class="form-control" id="part_status_id" >
+                        <datalist id="part_status" >
+                          {% for part_status in part_status_context %}
+                          <option value="{{part_status.p_status}}"> {{part_status.p_status}} </option>
+                    
+                          {% endfor %}
+                          
+                      </datalist>
+                      </div>
+                    
+                </td>
+
+                </tr>
+
+                <tr>
+                    <td>Estimated arrival time for part:</td>
+                    <td> <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label"> <strong>  </strong></label>
+                        <input required type="datetime-local" name = "eta" class="form-control" id="eta_id" >
+                  
+                        
+                        
+                      </div></td>
+                </tr>
+
+                <tr>
+                    <td>Comments :</td>
+                    <td><textarea name = "part_order_comments"   class="form-control" id="descrition_id" > </textarea></td>
+                </tr>
+
+                <tr>
+                    <td>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    </td>
+                </tr>
+        </form>
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Order part page</h3><br>
+
+<form method="POST" action= "#" >
+    {% csrf_token %} 
+ <div class="col bg-light col-md-8 col-mb-4" > 
+    
+
+    <div class="mb-3">
+        <label  class="form-label"> <strong> Device </strong></label>
+        <input  type="text" name = "device_name" value="{{ jobs_context.device.devices }}" class="form-control" id="#" >
+    
+      </div>
+
+      <div class="mb-3">
+        <label  class="form-label"> <strong> Make </strong></label>
+        <input  type="text" name = "make_name" class="form-control" id="#"  value="{{ jobs_context.make.make }}">
+    
+      </div>
+
+      <div class="mb-3">
+        <label  class="form-label"> <strong> Model </strong></label>
+        <input  type="text" name = "model_name" class="form-control" id="#" value="{{ jobs_context.model.model }}">
+    
+      </div>
+
+<div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label"><strong> Part Name </strong></label>
+    <input required list="part_name_list" name = "part_name" class="form-control" id="part_name_id" aria-describedby="emailHelp">
+    <datalist id="part_name_list" >
+      {% for part_name in part_name_context %}
+      <option value="{{part_name.part_name}}"> {{ part_name.part_name }} </option>
+
+      {% endfor %}
+      
+  </datalist>
+  </div>
+
+
+
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label"><strong> Colour </strong></label>
+    <input required list="colour_list" name = "colour_name" class="form-control" id="colour_id" aria-describedby="emailHelp">
+    <datalist id="colour_list" >
+      {% for colour in colour_context %}
+      <option value="{{colour.colour}}"> {{colour.colour}} </option>
+
+      {% endfor %}
+      
+  </datalist>
+  </div>
+
+
+
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label"><strong> Supplier </strong></label>
+    <input required list="supplier_list" name = "supplier_name" class="form-control" id="supplier_id" aria-describedby="emailHelp">
+    <datalist id="supplier_list" >
+      {% for supplier in supplier_context %}
+      <option value="{{supplier.supplier}}"> {{supplier.supplier}} </option>
+
+      {% endfor %}
+      
+  </datalist>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label"> <strong> Quantity </strong></label>
+    <input required type="number" name = "quantity_name" class="form-control" id="quantity_id" >
+
+  </div>
+
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label"> <strong>Buying  Cost </strong></label>
+    <input required type="number" name = "buying_cost_name" class="form-control" id="cost_id" >
+
+  </div>
+
+  <div class="mb-3">
+    <label  class="form-label"> <strong>Part Description </strong></label>
+    <textarea  name = "part_des_name" class="form-control" id="#" ></textarea>
+
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label"><strong> Select part status </strong></label>
+    <input required list="part_status" name = "part_status_name" class="form-control" id="part_status_id">
+    <datalist id="part_status" >
+      {% for part_status in part_status_context %}
+      <option value="{{part_status.p_status}}"> {{part_status.p_status}} </option>
+
+      {% endfor %}
+      
+  </datalist>
+  </div>
+
+
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</div> 
+
+</form>
+
+{% endblock %}

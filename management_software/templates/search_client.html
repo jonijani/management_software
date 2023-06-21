@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+
+<h3>Search client page</h3>
+
+
+<form class="d-flex" method="POST" action="{% url 'search_client' %}" style="align-self: center;">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search Client" aria-label="Search" name="searched">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+
+<br>
+<table class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2" >
+      
+    <tr style="border: 1px solid rgb(48, 45, 45);" width="95%" style="border: black;" >
+        <th>Client ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Contact</th>
+        <th>Email</th>
+        <th>created</th>
+        
+
+    </tr>
+    
+    <h3 style="color: red;">Search result for <strong> {{ searched }} </strong></h3>
+    {% for show_result in  all_clients_context %}
+
+    
+
+
+    <tr style="border: 2px solid black" background-color="green">
+      
+ 
+            <td><a href="{% url 'Client_detail_info' show_result.id %}">{{ show_result.id  }}</a></td>
+        
+            
+            <td>{{ show_result.first_name }}</td>
+            <td>{{ show_result.last_name }}</td>
+            <td>{{ show_result.mobile }}</td>
+            <td>{{ show_result.email }}</td>
+            <td>{{ show_result.created }}</td>
+    
+
+    </tr>
+    {% endfor %}
+    
+
+</table>
+
+
+
+{% endblock %}

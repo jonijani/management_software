@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Daily sale page dashboard </h3>
+
+<!-- <form>
+    <div style="width: 50%;"> 
+    <select class="form-select" aria-label="Default select example">
+        
+        <option selected value="Daily">Daily</option>
+        <option value="Weekly">Weekly</option>
+        <option value="Monthly">Monthly</option>
+        <option value="Yearly">Yearly</option>
+      </select>
+    </div>
+
+</form> -->
+
+
+<form method = "POST">
+    {% csrf_token %}
+    <div style="width:  800px; display:flex">
+        <span> From: </span>
+    <input type="date" name="start_range" class="form-control">
+    <span>To : </span>
+    <input type="date" name="end_range" class="form-control" >
+    <button type="submit" class="btn btn-primary" > Submit </button>
+    </div>
+</form>
+
+<strong>Total Revenue </strong> : {{net_total_context}}
+
+
+{% comment %} 
+ <div style="width: 50%; height:50%"> 
+<canvas id="myChart" ></canvas>
+<table>
+    
+
+
+{% for i  in daily_total_context  %}
+
+
+
+} <tr>
+    <td>{{i.date}} </td>
+    <td>{{i.total}} </td>
+
+ 
+</tr> 
+{% endfor %}
+
+</table> 
+
+
+
+
+
+</div> 
+{% endcomment %}
+
+
+
+
+
+
+
+<div style="height: 500px ; width:900px"> 
+    <canvas id="myChart"  ></canvas>
+</div>
+<script>
+const ctx = document.getElementById('myChart');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for i in daily_total_date_list_context %}"{{i}}", {% endfor %}],
+        datasets: [{
+            label: '# of Votes',
+            data: [ {% for j in daily_total_list_context %}{{j}}, {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+
+ 
+
+
+
+
+
+
+
+
+{% endblock %}

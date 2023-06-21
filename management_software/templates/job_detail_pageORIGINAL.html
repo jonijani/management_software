@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Job detail page </h3>
+
+
+<div class="container border border-dark  ">
+  <div class="row">
+    <div class="col border border-dark bg-light col-md-8 col-mb-4 ">
+      <h3 class="text-white bg-primary text-center">Job details</h3>
+      {% if detail_page_context.customer.client_type == 'corporate' %}
+      <h4> <p style="background-color: yellow;"><strong> Corporate</strong></p></h4>
+      {% endif %}
+
+
+      <p class="mb-n4"><strong>JOB ID : </strong>&nbsp;&nbsp; 
+        <a  href="{% url 'job_update_page' detail_page_context.id %}">{{detail_page_context.id}}&nbsp;&nbsp;</a> </p>
+      <p class=""><strong>Device : </strong>&nbsp;&nbsp; {{detail_page_context.device}}</p>
+      <p><strong> Make :</strong>&nbsp;&nbsp;{{detail_page_context.make}}</p>
+      <p><strong>Model :</strong> &nbsp;&nbsp;{{detail_page_context.model}}</p>
+      <p><strong> Fault :</strong>&nbsp;&nbsp;{{detail_page_context.fault}}</p>
+      <p><strong> Description :</strong>&nbsp;&nbsp;{{detail_page_context.description}}</p>
+      <p><strong> IMEI :</strong>&nbsp;&nbsp;{{detail_page_context.imei}}</p>
+      <p><strong> Aceessories with device :</strong>&nbsp;&nbsp;{{detail_page_context.accessories}}</p>
+      <p><strong>Sale item on :</strong>&nbsp;&nbsp;{{detail_page_context.sale_item}}</p>
+      <p><strong>Passcode :</strong>&nbsp;&nbsp; {{detail_page_context.passcode}}</p>
+      <p><strong>Netwrok :</strong>&nbsp;&nbsp; {{detail_page_context.network}}</p>
+      <div style="background-color: greenyellow;">
+      <p><strong>Cost :</strong>&nbsp;&nbsp; {{detail_page_context.cost}}</p>
+      {% if detail_page_context.customer.client_type == 'corporate' %}
+      
+      <p><strong>VAT :</strong>&nbsp;&nbsp; {{detail_page_context.get_vat}} </p>
+      <p><strong>Total Cost :</strong>&nbsp;&nbsp; {{detail_page_context.get_total_cost}} </p>
+      {% endif %}
+      </div>
+      <p><strong>Job status :</strong>&nbsp;&nbsp; {{detail_page_context.job_status}}</p>
+      <p><strong>Collection time :</strong>&nbsp;&nbsp; {{detail_page_context.collection_time}}</p>
+      <p><strong>Payment status :</strong>&nbsp;&nbsp; {{detail_page_context.payment_status}}</p>
+      <p><strong>Created by :</strong>&nbsp;&nbsp; {{detail_page_context.created_date}}</p>
+      <p><strong>Created by :</strong>&nbsp;&nbsp; {{detail_page_context.created_by}}</p>
+
+      <div>
+        <h3 class="text-center"> <strong>Client information</strong></h3>
+
+        <p>Client ID : {{detail_page_context.customer.id}}</p>
+        <p>First Name : {{detail_page_context.customer.first_name}}</p>
+        <p>Last Name : {{detail_page_context.customer.last_name}}</p>
+        <p> Mobile :{{detail_page_context.customer.phone}}</p>
+        <p>Landline :{{detail_page_context.customer.landline}}</p>
+        <p>Email :{{detail_page_context.customer.email}}</p>
+        <p>Address :{{detail_page_context.customer.address}}</p>
+        <p>Postcode :{{detail_page_context.customer.postcode}}</p>
+
+
+
+      </div>
+
+
+    </div>
+    <div class="col  bg-light  col-md-4">
+      <h3 class="text-white bg-primary text-center">Actions</h3>
+
+      <a class="btn btn-primary btn-lg col-md-12 mb-2"href="{% url 'job_update_page' detail_page_context.id %}">Update</a>
+      <a class="btn btn-primary btn-lg col-md-12 mb-2" href="{% url 'reciept' detail_page_context.id  %}">View Reciept</a>
+      <a class="btn btn-primary btn-lg col-md-12 mb-2" href="{% url 'Client_detail_info' detail_page_context.customer.id %}">Client details</a>
+      {% comment %} {% if not job_complete_v_context.c_job.job_status == "Completed" %}<a class="btn btn-primary btn-lg col-md-12 mb-2" href="{% url 'complete' detail_page_context.id %}">Complete</a>{% endif %} {% endcomment %}
+      {% if not detail_page_context.completed %}<a class="btn btn-primary btn-lg col-md-12 mb-2" href="{% url 'complete' detail_page_context.id %}">Complete</a>{% endif %}
+      
+      {% if not job_d_context.delivered %}<a class="btn btn-primary btn-lg col-md-12 mb-2" href="{% url 'retail_sale_page' detail_page_context.id  %}">Deliver</a>{% endif %}
+      <a class="btn btn-primary btn-lg col-md-12 mb-2" href="{% url 'job_rebook' detail_page_context.id  %}">Job Rebook</a>
+      <a class="btn btn-primary btn-lg col-md-12 mb-2" href="{% url 'contact_by_email' detail_page_context.customer.id detail_page_context.id  %}">Send Email</a>
+      <a class="btn btn-primary btn-lg col-md-12 mb-2">Send text</a>
+      <a class="btn btn-primary btn-lg col-md-12 mb-2" href="{% url 'order_part' detail_page_context.id %}">Order Parts</a>
+      <a class="btn btn-primary btn-lg col-md-12 mb-2" href="{% url 'images' detail_page_context.id  %}">Device Images / Upload Images</a>
+
+      <!-- <a class="btn btn-primary btn-lg col-md-12 mb-2">Update</a>
+      <a class="btn btn-primary btn-lg col-md-12 mb-2">View Reciept</a>
+      <a class="btn btn-primary btn-lg col-md-12 mb-2">Client details</a>
+      <a class="btn btn-primary btn-lg col-md-12 mb-2">Complete</a> -->
+
+    </div>
+  </div>
+
+
+  
+
+  {% comment %} job updates  area strats here {% endcomment %}
+  <div class="container border border-dark  ">
+    <div class="row">
+      <div class="col border border-dark bg-light col-md-8 ">
+    
+        <h3 class="text-white bg-primary text-center">Job updates  {{parts_context.id}}</h3>
+
+        {% comment %} delivered jobs shows here {% endcomment %}
+        {% if job_d_context.delivered %}
+      <table class="table table-hover ">
+        <thead>
+          <tr>
+            <th>Delivered by  </th>
+            <th>Job Status</th>
+            <th>Cost</th>
+            <th>Payment </th>
+            <th>Delivered on </th>
+          </tr>
+          <tr>
+
+            <td> {{job_d_context.delivered_by}}</td>
+            <td> {{job_d_context.job_status_deliver}}</td>
+            <td> {{job_d_context.cost_deliver}}</td>
+            <td> {{job_d_context.payment_status_deliver}}</td>
+            <td> {{job_d_context.delivered_on}}</td>
+
+
+          </tr>
+
+          <tr class="mb-4">
+            <td colspan=3><strong>Description :</strong> {{job_d_context.delivery_comments}}</td>
+          </tr>
+
+        </thead>
+      </table>
+      {% endif %}
+  
+
+
+        {% comment %} job complete status show update area {% endcomment %}
+        {% if not job_complete_v_context.checked %}
+        <table class="table table-hover ">
+          <thead>
+            <tr>
+              <th>Completed by 1 </th>
+              
+              <th>Cost</th>
+              <th>Payment </th>
+              <th>Completed Time </th>
+            </tr>
+
+            <tr>
+            <td> {{job_complete_v_context.completed_by}}</td>
+            <td> {{job_complete_v_context.cost_com}}</td>
+            <td> {{job_complete_v_context.payment_status_com}}</td>
+            <td> {{job_complete_v_context.completed_on}}</td>
+            </tr>
+
+            
+        <tr class="mb-4">
+        <p> <td colspan=3><strong>Job Completed  :</strong>  Part ID : {% for part in detail_page_context.job_inventory.all  %} <strong><a href="{% url 'part_detail' part.id %}">{{part.id}}{{part.part_name}}</a> </strong> {% endfor %} {{job_complete_v_context.complete_update}}</td></p>
+        </tr>
+
+      </table>
+      {% endif %}
+
+
+
+
+
+{% comment %} Part ordered  area {% endcomment %}
+{% comment %} {% if not job_complete_v_context.completed %} {% endcomment %}
+{% comment %} <table class="table table-hover ">
+  <thead>
+    <tr>
+      <th>Ordered by  </th>
+      
+      <th>Cost</th>
+      <th>Status</th>
+      <th>Payment </th>
+      <th>Ordered  Time </th>
+    </tr>
+    {% for part_ordered_context in part_ordered_context %}
+    <tr>
+    <td> {{part_ordered_context.created_by}}</td>
+    <td> {{part_ordered_context.buying_cost}}</td>
+    <td> {{part_ordered_context.part_status}}</td>
+    <td> {{part_ordered_context.payment_status_com}}</td>
+    <td> {{part_ordered_context.created_date}}</td>
+    </tr>
+
+
+    
+<tr class="mb-4">
+<p> <td colspan=3>Description  : {{part_ordered_context.part_description}}</td></p>
+</tr>
+{% endfor %}
+
+</table> {% endcomment %}
+{% comment %} {% endif %} {% endcomment %}
+
+
+
+
+
+
+
+
+      
+      {% if job_update_table_context.count >= 1 %}
+
+
+      <table class="table table-hover ">
+        <thead>
+          <tr>
+            <th>Updated by  </th>
+            <th>Status</th>
+            <th>Cost</th>
+            <th>Payment </th>
+            <th>Updated on </th>
+          </tr>
+
+
+
+          
+          {% for for_job_updates in job_update_table_context reversed %}
+
+          <tr>
+
+            <td> {{for_job_updates.updated_by}}</td>
+            <td> {{for_job_updates.job_status_update}}</td>
+            <td> {{for_job_updates.cost_update}}</td>
+            <td> {{for_job_updates.payment_status_update}}</td>
+            <td> {{for_job_updates.updated_on}}</td>
+
+
+          </tr>
+
+          <tr class="mb-4">
+            <td colspan=3><strong>Description :</strong> {{for_job_updates.description_update}}</td>
+          </tr>
+
+          {% endfor %}
+          
+
+
+
+        </thead>
+      </table>
+      {% endif %}
+
+
+
+      <table class="table table-hover ">
+        <thead>
+          <tr>
+            <th>Created by  </th>
+            <th>Job Status</th>
+            <th>Cost</th>
+            <th>Payment </th>
+            <th>Created on </th>
+          </tr>
+
+
+
+
+
+          {% comment %} {% for detail_page_context in detail_page_context  %} {% endcomment %}
+
+          <tr>
+
+            <td> {{detail_page_context.created_by}}</td>
+            <td> {{detail_page_context.job_status}}</td>
+            <td> {{detail_page_context.cost}}</td>
+            <td> {{detail_page_context.payment_status}}</td>
+            <td> {{detail_page_context.created_date}}</td>
+
+
+          </tr>
+
+          <tr class="mb-4">
+            <td colspan=3><strong>Description :</strong> {{detail_page_context.description}}</td>
+          </tr>
+
+          {% comment %} {% endfor %} {% endcomment %}
+
+
+
+        </thead>
+      </table>
+
+      
+      
+    
+
+        
+
+      </div>
+
+      <div class="col col-md-4 border-dark text-center"> <h3 class="bg-primary text-white">Finger prints</h3>
+
+        {% for Fprint in Fprint_context reversed %}
+        <span> {{Fprint.user_fprint}} </span><span> &nbsp;&nbsp;  {{Fprint.date_time_fprint}}   </span>
+        <br/>
+        {% endfor %}
+
+      </div>
+
+      
+    </div>
+    
+  </div>
+
+
+  
+</div>
+
+  {% endblock %}

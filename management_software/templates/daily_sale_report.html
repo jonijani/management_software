@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+ tr:hover {
+   background-color: yellow;}
+
+
+.mid_container {
+            text-align: center;
+            height: fit-content;
+             width: 96%;
+             align-content: center;
+             border-style: solid;
+             border-color:lightgray; 
+             
+            margin-left: auto;
+            margin-right: auto ;
+            margin-top: 2% ;
+
+}
+
+input {
+  position: relative;
+  width: 150px; height: 25px;
+  color: white;
+}
+
+input:before {
+  position: absolute;
+  top: 3px; left: 3px;
+  content: attr(data-date);
+  display: inline-block;
+  color: black;
+}
+
+input::-webkit-datetime-edit, input::-webkit-inner-spin-button, input::-webkit-clear-button {
+  display: none;
+}
+
+input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  color: black;
+  opacity: 1;
+}
+
+
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- Main div-->
+<div style="width: 98%;  
+            border-style: solid;
+            border-color:lightgray;            
+            align-content: center; 
+            margin-left: auto;
+            margin-right: auto ; 
+            margin-top: 2% ;          ">   
+
+<!-- Dive for main title daily sale report -->
+<div style="background-color: rgb(233, 230, 230);
+            text-align: center;
+            
+             width: 96%;
+             align-content: center;
+             border-style: solid;
+             height: 150px;
+             
+            margin-left: auto;
+            margin-right: auto ;
+            margin-top: 2% ; " ><h1> Daily Sale report </h1>
+          
+          <div class="mid_container " style="align-items: center;">    
+            <form method="POST" action="#">
+              {% csrf_token %}
+              
+            
+              <div class="row" style="margin-left: 35%; height: 20%;">
+                <div class="col-sm" >
+                  <table > 
+                    <tr style="width: 50%;align-items: center;"> 
+                      
+                      <td>  <strong>Select date : </strong></td>
+                  <!-- {% comment %} <td><input required type="date" class="form-control "  name="date_name" > </td> {% endcomment %} -->
+                  <td><input  type="date" data-date="" data-date-format="DD MMMM YYYY" name="date_name"> </td>
+                 <td>  <button type="submit" class="btn btn-primary">Submit</button></td>
+                 <td> {{ date_context }} </td> 
+                </tr> 
+                </table>
+                </div>  
+              </div>
+            
+            </form>
+          </div>
+        
+        
+        
+        </div>
+
+
+
+ 
+<!-- Div to show daily jobs -->
+<div class="mid_container"> 
+  <h2 style="background-color: lightskyblue; text-align: center;">Devices </h2>  
+<table class="table table-striped" >
+    <thead>
+      <tr>
+        <th scope="col">JOB ID </th>
+        <th scope="col">Name </th>
+        <th scope="col">Make </th>
+        <th scope="col">Model </th>
+        <th scope="col">Reciept No</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Payment Type</th>
+        
+        <th scope="col">User</th>
+        <th scope="col">Date</th>
+        
+
+      </tr>
+    </thead>
+   
+    <tbody>
+        {% for c_cart_context in d_jobs_context reversed %}
+      <tr>
+        <th scope="row" > <a href="{% url 'job_detail_page' c_cart_context.job_deliver %}">{{c_cart_context.job_deliver.id}}</a></th> 
+        <td>{{c_cart_context.job_deliver.customer.full_name}}</td>
+        <td>{{c_cart_context.job_deliver.make.make}}</td>
+        <td>{{c_cart_context.job_deliver.model.model}}</td>
+        <td><a href="{% url 'reciept' c_cart_context.job_deliver  %}">{{c_cart_context.reciept_daily_sale}}</a></td>
+        <td>{{c_cart_context.job_deliver.cost}}</td>
+        <td>{{c_cart_context.payment_type_daily_sale}}</td>
+        <td>{{c_cart_context.sale_person}}</td>
+        <td>{{c_cart_context.date}}</td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Reatil daily sale accessories  -->
+
+<div class="mid_container"> 
+  <h2 style="background-color: lightskyblue; text-align: center;">Accessories </h2>  
+<table class="table table-striped" >
+    <thead>
+      <tr>
+        
+        <th scope="col">Acc ID </th>
+        <th scope="col">Name </th>
+        <th scope="col">Make </th>
+        <th scope="col">Model </th>
+        <th scope="col">Reciept No</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Payment Type</th>
+        
+        <th scope="col">User</th>
+        <th scope="col">Date</th>
+        
+
+      </tr>
+    </thead>
+   
+    <tbody>
+        
+       {% for show_result in sold_acc_daily_sale_context reversed %}
+       
+      
+      <tr>
+        <th scope="row" > </a> {{ show_result.id }} </th> 
+        <th>{{ show_result.retail_acc.acce_name }}</th> 
+        <td>  {{ show_result.retail_acc.make }} </td>
+        <td>   {{ show_result.retail_acc.model }}</td>
+        <td>   </td>
+        <td>  {{ show_result.retail_price }}   </td>
+        <td>  {{ show_result.payment_type }}   </td>
+        <td>  {{ show_result.user }}   </td>
+        <td>  {{ show_result.date }}   </td>
+        
+        
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
+</div>
+
+
+
+<!-- Phones -->
+<div class="mid_container"> 
+  <h2 style="background-color: lightskyblue; text-align: center;">Phones  </h2>  
+<table class="table table-striped" >
+    <thead>
+      <tr>
+        
+        
+        <th scope="col">Make </th>
+        <th scope="col">Model </th>
+        <th scope="col">Memory Size </th>
+        <th scope="col">Colour</th>
+        <th scope="col">Reciept No</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Payment Type</th>
+        
+        <th scope="col">User</th>
+        <th scope="col">Date</th>
+        
+
+      </tr>
+    </thead>
+   
+    <tbody>
+        
+
+      <tr>
+        <th scope="row" > </a>====</th> 
+        <td>====</td>
+        <td>====</td>
+        <td>====</td>
+        <td>====</a></td>
+        <td>====</td>
+        <td>====</td>
+        <td>====</td>
+        
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+  
+
+<!-- sale summary report starts here  -->
+
+  <div class="mid_container">      
+  <h2 style="background-color: lightskyblue; text-align: center;">sale summary report</h2>
+  <table class="table col col-md-6  table-striped   "  >  
+    <thead>
+      <tr>
+        <th scope="col"><strong>    Sale Type     </strong> </th>
+        <td >     </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Engineering</td>
+        <td>{{ total_context }}</td>
+        
+      </tr>
+      <tr>
+        <td>Accessories</td>
+      <td>  {{ total_accessories_context }}</td>
+      </tr>
+      <tr>
+        <td>Phones</td>
+      <td>--------</td>
+      </tr>
+
+      <tr>
+        <td>Corporate</td>
+      <td>--------</td>
+      </tr>
+
+      <tr>
+        <th scope="col"><strong>    Sale Type     </strong> </th>
+        <td >     </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Total Cash</td>
+        <td>{{ total_jobs_cash_context  }} &nbsp; &nbsp;  (  {{ d_jobs_cash_count_context }} ) </td> 
+        {% comment %} {{ d_jobs_payment_type_context }} {% endcomment %}
+        
+      </tr>
+      <tr>
+        <td>Total Card</td>
+      <td> {{ total_jobs_card_context }}  </td>
+
+      </tr>
+      <tr>
+        <td>Total Amex</td>
+      <td>{{ total_jobs_amax_context }} </td>
+      </tr>
+
+      <tr>
+        <td>izettle Revive</td>
+      <td>  {{ total_irevive_context }} </td>
+      </tr>
+
+      <tr>
+        <td>izettle (star)</td>
+      <td> {{ total_istar_context }} </td>
+      </tr>
+
+
+
+      <tr>
+        <td>Total Bank</td>
+      <td>--------</td>
+      </tr>
+
+      
+
+      <tr style="color: red;">
+        <td >Expences </td>
+      <td>--------</td>
+      </tr>
+
+
+      <tr>
+        <td>Cash After Expences</td>
+      <td>--------</td>
+      </tr>
+
+
+      <tr>
+        <th scope="col"><strong>    Total end of the day sale   </strong> </th> 
+        <td > <strong> £ {{Net_totals_context}} </strong> </td>
+        
+      </tr>
+
+      <tr>  
+        <td>   </td>
+        <td> 
+        <form method="POST" action="{% url 'End_of_day_sale' %}"> 
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary"> Send Report</button>
+
+          <input type="text" value = "{{Net_totals_context}}" style="display:none" name="total">
+          <input type="text" value = "{{date_context}}" style="display:none" name="date">
+          <button type="submit" class="btn btn-primary" id="End_of_day_sale_id"> Create End of sale report</button>
+
+        </form>
+      </td>
+        
+      </tr>
+
+
+    </tbody>
+  </table>
+</div> 
+
+
+
+
+
+
+</div>  <!-- Main div-->
+
+<script>
+
+  $("#End_of_day_sale_id").on("click", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
+</script>
+
+{% endblock %}
+

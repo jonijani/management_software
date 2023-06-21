@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+
+<h3>Complete  page</h3>
+<form method="POST" action= "#">
+    {% csrf_token %}
+<div class="form-floating col col-12 border bg-light ">
+    <div class="form-floating col col-4 ">
+        {% comment %} {% for complete_job_context in complete_job_context %} {% endcomment %}
+        
+        
+        <div class="input-group mb-3">
+          JOB ID :  {{ complete_job_context.id }}
+          </div>
+    
+        <div class="input-group mb-3">
+            Make :  {{ complete_job_context.make }}
+        </div>
+
+
+        <div class="input-group mb-3">
+            Model :  {{ complete_job_context.model }}
+        </div>
+
+       
+
+        <br>
+
+        <!-- select parts starts here  -->
+        <div class="mb-3"  >
+          
+          <label for="network_list" class="form-label"> <strong> Select Part </strong></label>
+          <!--name always used in views.py functions and ID always used in front end and html,javascripts -->
+          <input  list="select_part_list" name = "select_part_name" class="form-control" id="select_part_id" >
+          <datalist id="select_part_list"  >
+            
+            {% for parts_context in parts_context %}
+            <option  value="{{ parts_context.id }}"> &nbsp;&nbsp;&nbsp;&nbsp;{{ parts_context.part_name }} &nbsp;&nbsp;&nbsp;&nbsp;{{ parts_context.model }} "</option>
+
+            {% endfor %}
+            
+        </datalist>
+
+
+      </div>
+      <p>{{parts_context.id}}</p>
+
+
+
+
+
+
+
+
+
+
+
+        
+      
+        <br> 
+          {% comment %} cost input {% endcomment %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"> <strong> Cost : {{ complete_job_context.cost }}</strong></label>
+            <input type="number" value="{{ complete_job_context.cost }}" name = "cost_com_name" class="form-control" id="cost_com_id" >
+    
+          </div>
+
+        
+
+
+    
+    
+        <div>
+            <textarea class="form-control" {{ complete_job_context.c_job.description }} name="Complete_area_name" placeholder="Leave a comment here" id="Complete_area_id"></textarea>
+        </div>
+      <br>
+
+      
+       
+        <button type="submit" class="btn btn-primary"> Complete</button>
+    </form> 
+    <div>    
+  
+
+    
+
+</div>
+
+{% endblock %}

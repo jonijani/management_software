@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Add sale page</h3><br>
+
+
+
+<div style="width: 98%;  
+            border-style: solid;
+            border-color:lightgray;            
+            align-content: center; 
+            margin-left: auto;
+            margin-right: auto ; 
+            margin-top: 2% ;          "> 
+
+  <div style="width: 40%;  
+            border-style: solid;
+            border-color:lightgray;            
+            
+             
+            margin-top: 2% ; 
+            margin-left: 2% ;         ">
+
+           <strong> Add Accessories </strong>
+<div class="table table-striped">
+<form class="d-flex" method="POST" action="{% url 'add_sale' %}" style="align-self: center;">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search Accessories" aria-label="Search" name="searched">
+    <button class="btn btn-outline-success" type="submit">search</button>
+  </form>
+
+  
+      
+      </table>
+
+      <table class="table table-hover " >
+        {% comment %} <thead>
+          <tr>
+            <th >  Accessory ID</th>
+            <th >Model</th>
+            <th >Name</th>
+            <th >Price </th>
+            
+          </tr>
+        </thead> {% endcomment %}
+    
+        
+        <tbody>
+            {% for result_acc in result_acce_context %}
+          <tr>
+            
+              <td>{{result_acc.id}}</td>
+              <td>{{result_acc.model}}</td>
+              <td>{{result_acc.acce_name}}</td>
+              <td>{{result_acc.retail_price}}</td>
+              <td><a href="{% url 'acce_cart' result_acc.id %}">Add to cart</a></td>
+              
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+        
+      </table>
+    </div>
+
+
+
+      {% comment %} Engineering sale fetch {% endcomment %}
+    
+ <strong>Engineering sale </strong>
+<div class="table table-striped">
+<form class="d-flex" method="POST" action="{% url 'get_job' %}" style="align-self: center;">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Engineering sale" aria-label="Search" name="searched">
+    <button class="btn btn-outline-success" type="submit">search</button>
+  </form>
+
+  
+      
+      </table>
+
+      <table class="table table-hover " >
+        {% comment %} <thead>
+          <tr>
+            <th > JOB  ID</th>
+            <th >Model</th>
+            <th >Name</th>
+            <th >Price </th>
+            
+          </tr>
+        </thead> {% endcomment %}
+    
+        
+        <tbody>
+            {% for result_job in result_job_context %}
+          <tr>
+            
+                {% csrf_token %}
+              <td>{{result_job.id}}</td>
+              <td>{{result_job.model}}</td>
+              <td>{{result_job.fault}}</td>
+              <td>{{result_job.cost}}</td>
+              <td><a href="{% url 'acce_cart' result_job.id %}">Add to cart</a></td>
+              
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+        
+      </table>
+    </div>
+
+
+    {% comment %} Sale phones fetch  {% endcomment %}
+  
+      <strong>  Phone Sale  </strong>
+<div class="table table-striped">
+<form class="d-flex" method="POST" action="{% url 'add_sale' %}" style="align-self: center;">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Phone sale" aria-label="Search" name="searched">
+    <button class="btn btn-outline-success" type="submit">search</button>
+  </form>
+
+  
+      
+      </table>
+
+      <table class="table table-hover " >
+        {% comment %} <thead>
+          <tr>
+            <th > Phone ID</th>
+            <th >Model</th>
+            <th >Name</th>
+            <th >Price </th>
+            
+          </tr>
+        </thead> {% endcomment %}
+    
+        
+        <tbody>
+            {% for result in result_context %}
+          <tr>
+            
+                {% csrf_token %}
+              <td>{{result.id}}</td>
+              <td>{{result.model}}</td>
+              <td>{{result.acce_name}}</td>
+              <td>{{result.retail_price}}</td>
+              <td><a href="{% url 'acce_cart' result.id %}">Add to cart</a></td>
+              
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+        
+      </table>
+    </div>
+  </div>
+
+      <div class="col border border-dark bg-light col-md-4">
+
+
+  {% comment %} cart  {% endcomment %}
+
+  {% comment %} <strong> Cart </strong>
+
+  <table>
+    <tr>
+    <td>
+      Total price : 
+    </td>
+  </tr>
+  
+
+  
+  <tr>
+    <td>Payment Type</td> 
+    <td><select required class="form-select form-select-sm" name="payment_type_name"  aria-label=".form-select-sm example">
+        <option selected>Select Payment Type </option>
+        
+        {% for payment_type_context in payment_con %}
+        <option value="{{ payment_type_context.id }}" >{{ payment_type_context.payment }}</option>
+        {% endfor %}
+    </select></td>  
+</tr> 
+
+</table>
+      </div>
+ {% endcomment %}
+
+
+
+
+      
+
+  </div>
+
+
+
+
+   
+  
+
+
+
+{% endblock %}
+
+

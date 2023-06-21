@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>New part added </h3><br>
+
+<table class="table" >
+    <thead>
+      <tr>
+        <th >Part No </th>
+        
+        <th>Device</th>
+        <th >Make</th>
+        <th >model</th>
+        <th >Part name</th>
+        <th >Colour </th>
+        <th > Supplier</th>
+        <th > Cost</th>
+        <th >created on </th>
+        <th >created by </th>
+      </tr>
+    </thead>
+
+    <tr>
+        
+      <td> <a href="{% url 'part_detail' part_context.id %}"> {{ part_context.id }} </a></td> 
+      <td>{{part_context.devices}}</td>
+      <td>{{part_context.make}}</td>
+      <td>{{part_context.model}}</td>
+      <td>{{part_context.part_name}}</td>
+      <td>{{part_context.part_colour}}</td>
+      <td>{{part_context.supplier}}</td>
+      <td>{{part_context.cost}}</td>
+      <td>{{part_context.created_date}}</td>
+      <td>{{part_context.created_by}}</td>
+      
+      
+      
+      
+    </tr>
+
+    
+    <tbody>
+    
+        
+        
+      
+     
+
+   
+    
+  </table>
+
+{% endblock %}

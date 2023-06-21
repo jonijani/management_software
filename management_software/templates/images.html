@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Images page </h3>
+<form method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+<input required type="file" name = "image_name" class="form-control" id="image_id" >
+<br>
+<input required type="text" name = "comments_name" class="form-control" id="comments_id"  placeholder="Little Description about picture">
+<br>
+
+<button type="submit" class="btn btn-primary">Submit</button>
+
+
+</form>
+<br>
+
+{% for img_context in img_context %}
+<div style="display:flex;">
+    <div >
+    <li>
+        <a href="/media/{{img_context.image}}"> <img src="/media/{{img_context.image}}"></a>
+    
+    </li>
+    </div>
+&nbsp;&nbsp;&nbsp;
+    <div>
+        <p> picture ID : {{img_context.id}}<p>
+        <p>Time : {{img_context.captured_at}}</p>
+        <p> User : {{img_context.captured_by}}</p>
+        <p>Comments : {{img_context.comments}} </p>
+        
+    </div>
+
+</div>
+<br/>
+{% endfor %}
+
+
+
+
+{% endblock %}

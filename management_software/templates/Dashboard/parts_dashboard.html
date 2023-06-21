@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Parts dashboard page </h3>
+
+
+<br>
+Available parts :<strong>  £ {{total_available_context}}  </strong> --- Quantity : {{parts_available_count}}
+<br>
+Total Reserved :<strong> £ {{total_reserved_context}}  </strong> ---  Quantity : {{parts_reserved_count}}
+<br>
+Total ordered / waiting for parts : <strong> £ {{total_ordered_context}} </strong> --- Quantity : {{parts_ordered_count}}
+<br>
+Total requested part : <strong>   £ {{total_requested_context}} </strong> ---  Quantity : {{parts_requested_count}}
+<br>
+<br>
+Total Worth of all parts in house :<strong>  £ {{total_worth_of_in_house_parts}}   </strong>--- Quantity : {{total_number_of_parts_in_house}}
+
+<br>
+<br>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

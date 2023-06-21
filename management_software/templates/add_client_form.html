@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .corporate {
+    display:"none";
+  }
+
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>Add client details </h3>
+      <form method="POST" action="{% url 'add_customer' %}">
+        {% csrf_token %}
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" onclick="hide()" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="retail">
+          <label class="form-check-label" for="inlineRadio1">Retail</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" onclick="unhide()" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="corporate">
+          <label class="form-check-label" for="inlineRadio2">Corporate</label>
+        </div>
+
+        
+        <div id="corporate" style="display: none;">
+          <div class="mb-3 corporate" id="corporate_company" >
+            <label for="exampleInputEmail1" class="form-label ">Company</label>
+            <input type="text" name = "company_name" class="form-control" id="company_id" >
+            
+          </div>
+
+          <div class="mb-3 corporate" id="corporate_vat" >
+            <label for="exampleInputEmail1" class="form-label " >VAT</label>
+            <input type="number" name = "vat_name" class="form-control " id="vat_id" >
+            
+          </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="mb-3 ">
+          <label for="exampleInputEmail1" class="form-label">First name</label>
+          <input type="text" name = "first_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+      
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Last name</label>
+          <input type="text" name = "last_name"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Phone</label>
+          <input type="text" name = "phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Landline</label>
+          <input type="text" name = "landline" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" name = "email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Address</label>
+            <textarea class="form-control" name = "address"id="exampleInputEmail1" aria-describedby="emailHelp"></textarea>
+            
+          </div>
+          
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Postcode</label>
+            <input type="text" name = "postcode" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
+
+  <script>
+    function unhide(){
+      class_corporate = document.getElementById("corporate")
+      class_corporate.style.display="block"
+
+      
+    }
+
+    function hide(){
+      class_corporate = document.getElementById("corporate")
+      class_corporate.style.display="none"
+ 
+
+    }
+
+
+
+
+  </script>
+
+
+
+
+{% endblock %}

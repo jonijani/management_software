@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Customer cart html</h3>
+
+<table class="col border border-dark bg-light col-md-4">
+    <h5>Customer Cart</h5>
+    
+
+    {% for cart_context in cart_context %}
+
+    <tr>
+        <td>Job id : {{cart_context.c_cart.id}} <br></td>  
+     </tr>
+     <tr>
+        <td>IMEI : {{cart_context.c_cart.imei}} <br></td>  
+     </tr>
+     <tr>
+        <td>Make  : {{cart_context.c_cart.make}} <br></td>  
+     </tr>
+     <tr>
+        <td>Model : {{cart_context.c_cart.model}} <br></td>  
+     </tr>
+
+       <tr>
+           <td>Total Amount</td>  
+          <td>  £ {{cart_context.c_cart.cost}} </td>
+       </tr>
+
+      
+
+       
+        
+
+
+   
+       <form method="POST" action="#">
+        {% csrf_token %}
+        <input type="text" name="updated_cost_name" value="{{cart_context.c_cart.cost}}" style="display:none" >
+        
+
+       <tr>
+             <td>Payment Type</td> 
+             <td><select required class="form-select form-select-sm" name="payment_type_name"  aria-label=".form-select-sm example">
+                 <option selected>Select Payment Type</option>
+                 {% for payment_type_context in payment_type_context %}
+                 <option value="{{ payment_type_context.id }}" >{{ payment_type_context.payment }}</option>
+                 {% endfor %}
+             </select></td>  
+     </tr>
+
+     <tr>
+        <td>
+            <label for="exampleInputEmail1" class="form-label"> <strong> Delivery comments </strong></label>
+            <textarea name = "delivery_comments_name" {{job_update_context.description}}  class="form-control" id="descrition_id" placeholder="Delivery comments"> </textarea>
+  
+          </td>  
+        
+    </tr>
+
+     <tr>
+         <td></td>  
+         
+     </tr>
+     
+
+     <tr>
+         <td> <button type="submit" class="btn btn-primary  col-md-12 mb-2" >Complete Sale</button></td>  
+         
+     </tr>
+    </form>
+
+    {% endfor %}
+     
+   </table>
+
+
+
+
+{% endblock %}

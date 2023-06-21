@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>All Requested parts</h3>
+
+
+
+
+<table class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2" >
+      
+    <tr style="border: 1px solid rgb(48, 45, 45);" width="95%" style="border: black;" onclick="myFunction()" >
+        <th >Part No </th>
+        <th >JOB  ID </th>
+        <th >Part Status </th>
+        <th>Device </th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Part Name</th>
+        <th>Part Colour</th>
+        <th>Supplier</th>
+        <th>Buying Cost</th>
+        <th>created date</th>
+        <th>created by</th>
+        
+    </tr>
+   
+    
+    {% comment %} <h3 style="color: red;">Search result for <strong> {{ searched }} </strong></h3> {% endcomment %}
+   
+    {% for show_result in  parts_ordered_context reversed %}
+    {% if  show_result.part_status.p_status == 'Part Requested'  %}
+    
+
+
+    <tr style="border: 2px solid black" >
+      
+ 
+            <td><a href="{% url 'requested_part_detail' show_result.id  %}">{{ show_result.id  }}</a></td>
+        
+            <td><a href="#">{{ show_result.job.id }}</a></td>
+            
+            <td>{{ show_result.part_status.p_status }}</td>
+            <td>{{ show_result.devices.devices }}</td>
+            
+            <td>{{ show_result.make.make }}</td>
+            <td>{{ show_result.model.model }}</td>
+            <td>{{ show_result.part_name.part_name }}</td>
+            <td>{{ show_result.part_colour.colour }}</td>
+            <td>{{ show_result.supplier.supplier }}</td>
+            <td>{{ show_result.buying_cost }}</td>
+            <td>{{ show_result.created_date }}</td>
+            <td>{{ show_result.created_by }}</td>
+            
+    </tr>
+    
+    {% endif %}
+
+    {% endfor %}
+   
+
+    
+    
+
+</table>
+
+
+
+
+
+{% endblock %}

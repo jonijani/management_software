@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>waiting for parts  jobs page </h3><br>
+
+<h2>Phones </h2>
+<table class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2" >
+      
+    <tr style="border: 1px solid rgb(48, 45, 45);" width="95%" style="border: black;"  >
+        <th >Job ID </th>
+        <th >Device </th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>IMEI </th>
+        <th>Fault</th>
+        <th>Cost</th>
+        <th>job status</th>
+        <th>user</th>
+        <th>Time</th>
+        
+        
+    </tr>
+   
+    {% for show_result in  waiting_for_parts_jobs_context reversed %}
+
+    
+    <tr style="border: 2px solid black" >
+      
+    
+            <td><a href="{% url 'job_detail_page' show_result.id  %}">{{ show_result.id  }}</a></td>
+        
+            <td>{{ show_result.device.devices }}</td> 
+            <td>{{ show_result.make.make }}</td>
+            <td>{{show_result.model.model}}  </td>
+            
+            <td>{{ show_result.imei }}</td>
+            <td>{{ show_result.fault}}</td>
+            
+            <td>{{ show_result.cost}}</td>
+            <td>{{ show_result.job_status.job_status}}</td>
+            
+            <td>{{ show_result.created_by }}</td>
+            <td>{{ show_result.created_date }}</td>
+            
+    </tr>
+    
+    {% endfor %}
+
+</table>   
+        
+
+
+
+<h2>Laptops </h2>
+<table class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2" >
+      
+    <tr style="border: 1px solid rgb(48, 45, 45);" width="95%" style="border: black;"  >
+        <th >Job ID </th>
+        <th >Device </th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>IMEI </th>
+        <th>Fault</th>
+        <th>Cost</th>
+        <th>job status</th>
+        <th>user</th>
+        <th>Time</th>
+        
+        
+    </tr>
+   
+    {% for show_laptop_result in  laptop_waiting_for_parts_jobs reversed %}
+
+    
+    <tr style="border: 2px solid black" >
+      
+    
+            <td><a href="{% url 'job_detail_page' show_laptop_result.id  %}">{{ show_laptop_result.id  }}</a></td>
+        
+            <td>{{ show_laptop_result.device.devices }}</td> 
+            <td>{{ show_laptop_result.make.make }}</td>
+            <td>{{show_laptop_result.model.model}}  </td>
+            
+            <td>{{ show_laptop_result.imei }}</td>
+            <td>{{ show_laptop_result.fault}}</td>
+            
+            <td>{{ show_laptop_result.cost}}</td>
+            <td>{{ show_laptop_result.job_status.job_status}}</td>
+            
+            <td>{{ show_laptop_result.created_by }}</td>
+            <td>{{ show_laptop_result.created_date }}</td>
+            
+    </tr>
+    
+    {% endfor %}
+
+</table>   
+
+
+
+
+<h2>Tablets </h2>
+<table class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2" >
+      
+    <tr style="border: 1px solid rgb(48, 45, 45);" width="95%" style="border: black;"  >
+        <th >Job ID </th>
+        <th >Device </th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>IMEI </th>
+        <th>Fault</th>
+        <th>Cost</th>
+        <th>job status</th>
+        <th>user</th>
+        <th>Time</th>
+        
+        
+    </tr>
+   
+    {% for show_laptop_result in  tablet_waiting_for_parts_jobs reversed %}
+
+    
+    <tr style="border: 2px solid black" >
+      
+    
+            <td><a href="{% url 'job_detail_page' show_laptop_result.id  %}">{{ show_laptop_result.id  }}</a></td>
+        
+            <td>{{ show_laptop_result.device.devices }}</td> 
+            <td>{{ show_laptop_result.make.make }}</td>
+            <td>{{show_laptop_result.model.model}}  </td>
+            
+            <td>{{ show_laptop_result.imei }}</td>
+            <td>{{ show_laptop_result.fault}}</td>
+            
+            <td>{{ show_laptop_result.cost}}</td>
+            <td>{{ show_laptop_result.job_status.job_status}}</td>
+            
+            <td>{{ show_laptop_result.created_by }}</td>
+            <td>{{ show_laptop_result.created_date }}</td>
+            
+    </tr>
+    
+    {% endfor %}
+
+</table>   
+        
+
+
+
+<h2>Others </h2>
+<table class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2" >
+      
+    <tr style="border: 1px solid rgb(48, 45, 45);" width="95%" style="border: black;"  >
+        <th >Job ID </th>
+        <th >Device </th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>IMEI </th>
+        <th>Fault</th>
+        <th>Cost</th>
+        <th>job status</th>
+        <th>user</th>
+        <th>Time</th>
+        
+        
+    </tr>
+   
+    {% for show_laptop_result in  other_waiting_for_parts_jobs reversed %}
+
+    
+    <tr style="border: 2px solid black" >
+      
+    
+            <td><a href="{% url 'job_detail_page' show_laptop_result.id  %}">{{ show_laptop_result.id  }}</a></td>
+        
+            <td>{{ show_laptop_result.device.devices }}</td> 
+            <td>{{ show_laptop_result.make.make }}</td>
+            <td>{{show_laptop_result.model.model}}  </td>
+            
+            <td>{{ show_laptop_result.imei }}</td>
+            <td>{{ show_laptop_result.fault}}</td>
+            
+            <td>{{ show_laptop_result.cost}}</td>
+            <td>{{ show_laptop_result.job_status.job_status}}</td>
+            
+            <td>{{ show_laptop_result.created_by }}</td>
+            <td>{{ show_laptop_result.created_date }}</td>
+            
+    </tr>
+    
+    {% endfor %}
+
+</table>   
+        
+        
+      
+     
+
+   
+    
+  
+
+{% endblock %}

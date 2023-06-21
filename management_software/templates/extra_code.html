@@ -1,0 +1,56 @@
+{% comment %} <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label" >Select Device Type</label>
+
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            {% for device in device_context %}
+            
+            <input type="radio" class="btn-check" onclick=make_dropdown_{{device.devices}}() name="device_mobile" value="{{device.devices}}" id="{{device.get_id}}" autocomplete="off" >
+            {% comment %} line 31 id="{{device.get_id}}" get_id came from models to shpw specific id for device  {% endcomment %}
+            <!--line 30 id should be unique when we pass variables in the id it wil get uniqe name -->
+
+
+            <label class="btn btn-outline-primary" for = "{{device.get_id}}" >{{device.devices}}</label>
+            {% comment %} line 40 my_dropdown_{{device.devices}}  device.devices will pick each button on forloop{% endcomment %}
+            <!-- in line 49 first comes from for loop variable and 2nd make comes from models fields/column -->
+            <script>
+              function make_dropdown_{{device.devices}}(){  
+                id = document.getElementById('make_list');
+                
+                
+                id.innerHTML -= '<option>Select Make</option>{% for make in make_context %}{% if make.device.id == 6 %}<option value="{{make.make}}">{{make.make}}</option>{% endif %}{% endfor %}'
+                id.innerHTML += '<option>Select Make</option>{% for make in make_context %}{% if make.device.id == device.get_id %}<option class="model_list" value="{{make.get_make_id}}" id="{{make.get_make_id}}">{{make.make}} {{make.get_make_id}} {{make.id}}</option>{% endif %} {% endfor %}';
+                
+              }
+            
+            
+            </script>
+              
+            {% endfor %}
+          
+           
+          </div> 
+          
+        </div>
+
+        <!-- dropdown menu for Make and this div s  -->
+        <div class="mb-3" id="mobile_div" >
+          <label for="exampleInputEmail1" class="form-label">Make </label>
+          <!--name always used in views.py functions and ID always used in front end and html,javascripts -->
+          <select name="make" class="form-control modals_list" onchange="model_dropdown()" id="make_list">
+          </select>
+          {% for make in make_context %}
+          <script> function model_dropdown{{make.get_make_id}}(){ model = document.getElementById('make_list') ; model = parseInt(model.value); var model_id = document.getElementById("make_list"); var list_id = document.getElementsByClassName("model_list"); alert(model); var html = document.getElementById("model_"); html.innerHTML += "<option>Select Model</option> {% for model in model_context %}{% if model.make.get_make_id == make.get_make_id %}<option value={{model.model}} id={{model.id}}>{{model.model}}</option>{% endif %}{% endfor %} "} </script>
+          {% endfor %}
+      </div>
+      
+
+        {% comment %} Model dropdown starts here  {% endcomment %}
+        <div class="mb-3">
+          
+          {% comment %} name always used in views.py functions and ID always used in front end and html {% endcomment %}
+          <label for="model">Select Model </label>
+          <select class="form-control" name="model" id="model_" onchange="model_dd">
+            
+          </select>
+
+        </div> {% endcomment %}

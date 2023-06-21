@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+
+<h3>Staff time  page</h3>
+
+
+
+  <form method="POST" action="#" class="col-2">
+    {% csrf_token %}
+    <div class="form-group">
+      <label >Start time</label>
+      <input  required type="date" class="form-control"  placeholder="start time" name="date_name" id="start" >
+
+    </div>
+    <div class="form-group">
+      <label f>Start time</label>
+      <input required type="time" class="form-control"  placeholder="Endtime" name="start_time" id="end" >
+    </div>
+
+    <div class="form-group" display=None>
+      <label f>End time</label>
+      <input required type="time" class="form-control"  placeholder="difference" name="end_time"  id="diff" >
+    </div>
+
+    <div class="form-group" >
+      <label f>Time difference</label>
+      <input type="hidden" class="form-control"  placeholder="difference" name="diff_name"  id="diff" >
+    </div>
+   
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+
+
+  <table class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2" >
+  
+    
+    <tr style="border: 1px solid rgb(48, 45, 45);" width="95%" style="border: black;"  >
+        <th > Date </th>  
+        <th > Start time </th>
+        <th > End Time </th>
+        <th>Total Hours worked </th>
+        <th>Total wages </th>
+        <th>Time registered at </th>
+        
+        
+    </tr>
+
+  helllo
+      {% for i in hours_worked_context reversed %}
+      
+      <tr>
+        <td> {{i.d_date}} </td>
+        <td> {{i.start_time}}</td>  
+        <td> {{i.end_time}}</td> 
+        <td> {{ i.hours_worked_field}}</td> 
+        <td> {{ i.hourly_wages|floatformat:2}}</td> 
+        <td> {{i.date}}</td> 
+        <td> {{i.created_by}}</td> 
+      </tr>
+      
+      {% endfor %}
+   
+    
+    
+  
+  </table>
+
+
+
+{% endblock %}

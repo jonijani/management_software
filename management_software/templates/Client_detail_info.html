@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+
+<h3>Client detail info page </h3>
+
+
+
+<div class="container border border-dark">
+  <div class="row">
+    <div class="col border border-dark bg-light" >
+      <h3 class="text-white bg-primary text-center">Client info</h3>
+      
+      {% if customer_context.client_type == 'corporate' %}
+      <h4> <p style="background-color: yellow;"><strong> Corporate</strong></p></h4>
+      {% endif %}
+
+
+       <p><strong>Client ID : </strong>&nbsp;&nbsp; <a href="{% url 'update_client_details' customer_context.id %}">{{customer_context.id }}&nbsp;&nbsp;:&nbsp;&nbsp;  Update client details</a> </p>
+
+       {% if customer_context.client_type == 'corporate' %}
+       <p style="background-color: greenyellow;"><strong>Company : </strong>&nbsp;&nbsp; {{customer_context.company}}</p>
+       <p><strong> VAT :</strong>&nbsp;&nbsp;?????????</p>
+      {% endif %}
+
+      <p><strong>First name : </strong>&nbsp;&nbsp; {{customer_context.first_name}}</p>
+      <p><strong> Last name :</strong>&nbsp;&nbsp;{{customer_context.last_name}}</p>
+      <p><strong>Mobile     :</strong> &nbsp;&nbsp;{{customer_context.phone}}</p>
+      <p><strong> Landline  :</strong>&nbsp;&nbsp;{{customer_context.landline}}</p>
+      <p><strong> Email     :</strong>&nbsp;&nbsp;{{customer_context.email}}</p>
+      <p><strong> Address   :</strong>&nbsp;&nbsp;{{customer_context.address}}</p>
+      <p><strong> Psotcode  :</strong>&nbsp;&nbsp;{{customer_context.postcode}}</p>
+      <p><strong>Created on :</strong>&nbsp;&nbsp;{{customer_context.created_date}}</p>
+      <p><strong>Created by :</strong>&nbsp;&nbsp; {{customer_context.created_by}}</p> 
+
+       
+    </div>
+    <div class="col border border-dark bg-light" >
+      <h3 class="text-white bg-primary text-center">Notes</h3>
+    </div>
+    <div class="col border border-dark bg-light" >
+      <h3 class="text-white bg-primary text-center">Dashboard</h3>
+    </div>
+  </div>
+</div>
+<br>
+<center><button  type="button" class="btn btn-primary"> <a class="text-white" href="{% url 'update_client_details' customer_context.id %}">Update Client details</a></button>
+  <button type="button" class="btn btn-primary"> <a class="text-white" href="#">Print Label</a></button>
+  <button type="button" class="btn btn-primary"> <a class="text-white" href="{% url 'add_direct_job' customer_context.id %}">Add Job</a></button>
+  <button type="button" class="btn btn-primary"> <a class="text-white" href="#">Send Text</a></button>
+  <button type="button" class="btn btn-primary"> <a class="text-white" href="#">Send Email</a></button>
+  
+
+</center>
+
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">JOB ID</th>
+          <th scope="col">IMEI</th>
+          <th scope="col">Make</th>
+          <th scope="col">Model</th>
+          <th scope="col">Fault</th>
+          <th scope="col">Job status</th>
+          <th scope="col">Cost</th>
+          <th scope="col">Created on</th>
+          <th scope="col">Created by </th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for jobs_context in jobs_context reversed %}
+         <tr>
+          <th><a href="{% url 'job_detail_page' jobs_context.id %}">{{jobs_context.id}}</a></th>
+          <td>{{jobs_context.imei}}</td>
+          <td>{{jobs_context.make}}</td>
+          <td>{{jobs_context.model}}</td>
+          <td>{{jobs_context.fault}}</td>
+          <td>{{jobs_context.job_status}}</td>
+          <td>{{jobs_context.cost}}</td>
+          <td>{{jobs_context.created_date}}</td>
+          <td>{{jobs_context.created_by}}</td>
+        </tr> 
+        
+        {% endfor %}
+
+        
+        
+      </tbody>
+    </table>
+
+
+    <!-- <div class="row">
+      <div class="col" resizable style="max-width:500px;"></div>
+      <div class="col" resizable></div>
+      <div class="col" style="min-width:100px;"></div>
+      <div class="col"></div>
+  </div> -->
+
+
+
+{% endblock %}

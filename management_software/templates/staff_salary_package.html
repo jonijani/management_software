@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Staff Total Salary  package </h3><br>
+
+
+
+
+
+<table  class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2"> 
+    <tr>
+    <th> Name </th>
+    <th> Salary </th>
+    <th> Per Week </th>
+    <th> Per day </th>
+    <th> Per Hour </th>
+    </tr>
+    {% for i in salary %}
+    <tr>
+        <td> {{i.staff}} </td>
+        <td> <strong>{{i.total_yearly_salary|floatformat:2}} </strong> </td>
+        <td> {{i.weekly_salary|floatformat:2}} </td>
+        <td> {{i.daily_salary|floatformat:2}} </td>  
+        <td> {{i.Hour_salary|floatformat:2}} </td>
+
+    </tr>
+    {% endfor %}
+    
+
+</table>
+
+
+
+
+
+{% endblock %}

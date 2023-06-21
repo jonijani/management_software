@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Contact customer by email page</h3>
+
+{% for e in e_context|slice:":1" %}
+    
+            Client ID : {{e.customer.id}}
+            <br>
+            Full name : {{e.customer.full_name}}
+                <br>
+            Sending Email to : {{e.customer.email}} 
+            <br>
+
+
+            Job ID :   {{j_id_context.id}}  
+                <br> 
+                <br> 
+
+
+ <form method='POST' action="#" class="col col mg-10">
+    {% csrf_token %}
+    
+
+
+        <!-- <label  class="form-label">Select email</label>
+          <div class="mb-3">
+            
+            <select id="disabledSelect" class="form-select">
+              <option value="1"> Hi 1: Hope you are well. Your device (Job ID 115147) is ready for collection. Feel free to contact us on 02074039111 or drop us an email at support@fonedoctors.com should you have any queries regarding your repair.Cheers, Patient Care Team fone doctors 3 Kings Head Yard London ,SE1 1NA ,02074039111</option>
+              <option value="2"> Hi 2: Hope you are well. Your device (Job ID 115147) is ready for collection. Feel free to contact us on 02074039111 or drop us an email at support@fonedoctors.com should you have any queries regarding your repair.Cheers, Patient Care Team fone doctors 3 Kings Head Yard London ,SE1 1NA ,02074039111</option>
+              <option value="3"> Hi 3: Hope you are well. Your device (Job ID 115147) is ready for collection. Feel free to contact us on 02074039111 or drop us an email at support@fonedoctors.com should you have any queries regarding your repair.Cheers, Patient Care Team fone doctors 3 Kings Head Yard London ,SE1 1NA ,02074039111</option>
+              <option value="4"> Hi 4: Hope you are well. Your device (Job ID 115147) is ready for collection. Feel free to contact us on 02074039111 or drop us an email at support@fonedoctors.com should you have any queries regarding your repair.Cheers, Patient Care Team fone doctors 3 Kings Head Yard London ,SE1 1NA ,02074039111</option>
+              <option value="5"> Hi 5: Hope you are well. Your device (Job ID 115147) is ready for collection. Feel free to contact us on 02074039111 or drop us an email at support@fonedoctors.com should you have any queries regarding your repair.Cheers, Patient Care Team fone doctors 3 Kings Head Yard London ,SE1 1NA ,02074039111</option>
+
+            </select>
+          </div>  -->
+
+          <p><div class="form-group green-border-focus col-10"> 
+             <input type="text"  name = "email_subject_name"class="form-control" id="email_subject_id" placeholder="Subject">   </p>
+
+          
+            <textarea class="form-control" name= "email_area_name" id="email_area_id" rows="5" placeholder="Email Area">Hello {{ e.customer.full_name }}
+              Job ID :  {{j_id_context.id}} 
+              Make : {{ j_id_context.make }}
+             Model : {{j_id_context.model}}  
+              is ready for collection .for more infor please contact us at 00000000000
+            
+            Thanks 
+            Regards  
+            </textarea>
+          </div>
+
+          <br>
+          <button type="submit" class="btn btn-primary">Send Email</button>
+
+          
+        
+</form>
+
+{% endfor %}
+<div style="border: dotted; border-radius: 4px; border-width: thin; width: 100%; margin-top: 3%;">
+  <p>  Hello contact us </p>  
+
+  <p>  Ready for collection</p> 
+
+  <p>  Need approval</p> 
+
+  <p>  Waiting for part</p> 
+
+
+
+</div>
+
+
+
+
+{% endblock %}

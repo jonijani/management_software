@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>dashboard page </h3>
+
+<table>
+    <tr>
+        
+     <td> <a href="{% url 'client_dashboard' %}">  <button type="button" class="btn btn-primary">Client Dashboard</button>  </a>  </td>  
+    <td> <a href="{% url 'jobs_dashboard' %}"> <button type="button" class="btn btn-primary">Jobs Dashboard</button>   </a>  </td>
+     <td>  <a href="{% url 'Accessories_dashboard' %}"> <button type="button" class="btn btn-primary">Acceessories Dashboard</button>  </a> </td>
+     <td>  <a href="{% url 'parts_dashboard' %}"> <button type="button" class="btn btn-primary">Parts Dashboard</button>  </a> </td>
+     <td>  <a href="{% url 'daily_sale_report_dashboard' %}"> <button type="button" class="btn btn-primary">Sales Dashboards</button>  </a> </td>   
+    </tr>
+
+    <tr>
+        
+        <!-- <td>    <button type="button" class="btn btn-primary">1 Dashboard</button>  </td>
+        <td>    <button type="button" class="btn btn-primary">2 Dashboard</button> </td>
+        <td>    <button type="button" class="btn btn-primary">3 Dashboard</button>  </td>
+        <td>    <button type="button" class="btn btn-primary">4 Dashboard</button>  </td> -->
+        
+    </tr>
+
+
+</table>
+<!-- 
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Getting Started with Chart JS with www.chartjs3.com</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      .chartMenu {
+        width: 100vw;
+        height: 40px;
+        background: #1A1A1A;
+        color: rgba(255, 26, 104, 1);
+      }
+      .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+      }
+      .chartCard {
+        width: 100vw;
+        height: calc(100vh - 40px);
+        background: rgba(255, 26, 104, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chartBox {
+        width: 700px;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px rgba(255, 26, 104, 1);
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chartMenu">
+      <p>WWW.CHARTJS3.COM (Chart JS 3.8.0)</p>
+    </div>
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+        <input onchange="filterData()" type="date" id="startdate" value="2022-jun-25">
+        <input onchange="filterData()" type="date" id="enddate" value="2022-jun-31">
+      </div>
+    </div>
+    <script type="text/javascript" src=" https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    // setup 
+    const dates = ["2022-jun-25", "2022-jun-26", "32022-jun-27", "32022-jun-28", "32022-jun-29", "32022-jun-30" , "32022-jun-31"];
+    const datapoints = [1, 2, 3, 4, 5, 6, 7]
+    const data = {
+      labels: dates,
+      datasets: [{
+        label: 'Weekly Sales',
+        data: datapoints,
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // config 
+    const config = {
+      type: 'bar',
+      data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+    function filterData(){
+      const dates2 = [...dates]
+      console.log(dates2);
+
+    }
+
+
+    </script>
+
+  </body>
+</html> -->
+
+
+
+
+
+
+{% include 'includes/messages.html' %}
+
+
+
+
+
+
+
+
+{% endblock %}

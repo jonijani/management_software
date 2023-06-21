@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Accessories cart  page</h3><br>
+
+ 
+  <table>
+    <thead>
+          <tr>
+          <th>Accessory ID</th>
+          <th> Name</th>
+          <!-- <th>     </th> -->
+          <th> Price</th>
+        </tr>
+    </thead>
+
+
+
+      <tr>
+        <td>{{acce_context.id}}</td>
+        <td>{{acce_context.acce_name}}</td>
+        <!-- <td>                          </td> -->
+        <td>{{acce_context.retail_price}}</td>
+    </tr>
+
+    <tr>      </tr>
+
+
+    <tr>
+        <td>
+        Total price : 
+        </td>
+
+        <td>   </td>
+
+
+        <td>
+            {{acce_context.retail_price}}  
+        </td>
+    </tr>
+  
+
+
+  <form method="POST" action="#">
+    {% csrf_token %}
+
+    
+    <input type="text" name="cost_name" value="{{acce_context.retail_price}} " style="display:none" >
+    
+
+   <tr>
+         <td>Payment Type</td> 
+         <!-- <td>            </td> -->
+         
+         <td><select required class="form-select form-select-sm" name="payment_type_name"  aria-label=".form-select-sm example">
+             <option selected>Select Payment Type</option>
+             {% for payment_type_context in payment_type_context %}
+             <option value="{{ payment_type_context.id }}" >{{ payment_type_context.payment }}</option>
+             {% endfor %}
+         </select></td>  
+ </tr>
+
+ <tr>
+    <td>
+        <label for="exampleInputEmail1" class="form-label"> <strong> Delivery comments </strong></label>
+        <textarea name = "delivery_comments_name" {{job_update_context.description}}  class="form-control" id="descrition_id" placeholder="Delivery comments"> </textarea>
+
+      </td>  
+    
+</tr>
+
+ <tr>
+     <td></td>  
+     
+ </tr>
+
+
+
+ <tr>
+     <td> <button type="submit" class="btn btn-primary  col-md-12 mb-2" >Complete Sale</button></td>  
+     
+ </tr>
+</form>
+
+
+
+
+</table>
+</div>
+
+
+
+{% endblock %}

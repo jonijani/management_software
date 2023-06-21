@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Ordered  parts  page </h3>
+
+
+
+<table class="table table-striped" style="border: 2px solid black;" width="60%"  cellspacing="2" cellpadding="2" >
+      
+    <tr style="border: 1px solid rgb(48, 45, 45);" width="95%" style="border: black;"  >
+        <th >Requested  No </th>
+        {% comment %} <th >Part No </th> {% endcomment %}
+        <th>Part Arrival time</th>
+        <th>Part Status</th>
+        
+        <th>JOB ID </th>
+        
+        <th>Model</th>
+        <th>Part Name</th>
+        
+        <th>Supplier</th>
+        <th>Buying Cost</th>
+        <th>Ordered date</th>
+        <th>ordered by</th>
+        
+    </tr>
+   
+    
+   
+    {% for show_result in  waiting_for_parts_context reversed %}
+
+    {% comment %} {% if not show_result.part_status.p_status != 'Ordered'  %} {% endcomment %}
+    {% if show_result.part_status.p_status == 'Ordered'  %}
+
+
+    <tr style="border: 2px solid black" >
+      
+            {% comment %} <td><a href="{% url 'requested_part_detail' show_result.id  %}">{{ show_result.requested_parts_ordered.id  }}</a></td>
+            <td><a href="{% url 'ordered_part_detail' show_result.id  %}">{{ show_result.id  }}</a></td> {% endcomment %}
+
+            <td><a href="{% url 'ordered_part_detail' show_result.id  %}">{{ show_result.requested_parts_ordered.id  }}</a></td>
+            {% comment %} <td><a href="{% url 'ordered_part_detail' show_result.id  %}">{{ show_result.id  }}</a></td> {% endcomment %}
+        
+            
+            
+            <td>{{ show_result.eta }}</td> 
+            <td>{{ show_result.part_status }}</td>
+            <td>JOB ID  </td>
+            
+            <td>{{ show_result.requested_parts_ordered.model.model }}</td>
+            <td>{{ show_result.requested_parts_ordered.part_name }}</td>
+            
+            <td>{{ show_result.requested_parts_ordered.supplier }}</td>
+            <td>{{ show_result.requested_parts_ordered.buying_cost }}</td>
+            <td>{{ show_result.created_date }}</td>
+            <td>{{ show_result.created_by }}</td>
+            
+    </tr>
+    
+    {% endif %}
+
+    {% endfor %}
+
+    
+    
+
+</table>
+
+{% endblock %}

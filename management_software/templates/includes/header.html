@@ -1,0 +1,162 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'dashboard' %}">LOGO</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if request.user.is_authenticated %}
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Clients
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'search_client' %}">Search Client</a></li>
+                  <li><a class="dropdown-item" href="{% url 'add_customer' %}">Add new client</a></li>
+                 
+                
+                </ul>
+              </li>
+
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Jobs
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'add_job' %}">Add Job</a></li>
+                  <li><a class="dropdown-item" href="{% url 'search_job' %}">Search Job</a></li>
+                  <li><a class="dropdown-item" href="{% url 'pending_jobs' %}">Pending Jobs</a></li>
+                  <li><a class="dropdown-item" href="{% url 'waiting_for_parts_jobs' %}">Waiting For parts Jobs</a></li>
+                  <li><a class="dropdown-item" href="{% url 'waiting_approval_jobs' %}">Waiting for approval Jobs</a></li>
+                  <li><a class="dropdown-item" href="{% url 'completed_jobs' %}">Completed Jobs</a></li>
+                  
+              
+                </ul>
+              </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Inventories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'inventories_dashboard' %}">Dashboard</a></li>
+              <li><a class="dropdown-item" href="{% url 'Add_new_part' %}">Add new part</a></li>
+              <li><a class="dropdown-item" href="{% url 'search_parts' %}">Search part</a></li>
+              <li><a class="dropdown-item" href="#">Request new Parts</a></li>
+              <li><a class="dropdown-item" href="{% url 'all_requested_parts' %}">All requested Parts</a></li> 
+              <li><a class="dropdown-item" href="{% url 'ordered_parts' %}">All Ordered Parts</a></li>
+              
+            </ul>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Accessories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'Accessories' %}">Search</a></li>
+              <li><a class="dropdown-item" href="{% url 'Add_new_accessories' %}">Add new Accessories</a></li>
+             
+            </ul>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Retail
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'add_sale' %}">Add Sale</a></li>
+              <li><a class="dropdown-item" href="{% url 'daily_sale_report' %}">Daily Sale Report</a></li>
+              <li><a class="dropdown-item" href="{% url 'daily_sale_report_dashboard' %}">Dashboard</a></li>
+            
+            </ul>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Staff
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'staff' %}">Add times</a></li>
+              <li><a class="dropdown-item" href="#"></a></li>
+             
+            
+            </ul>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              payroll
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'staff_salary_package' %}">Staff packages</a></li>
+              <li><a class="dropdown-item" href="#">Staff packages</a></li>
+              <li><a class="dropdown-item" href="#">Staff packages</a></li>
+              <li><a class="dropdown-item" href="#"></a></li>
+             
+            
+            </ul>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a class="nav-link active" href="http://localhost:8000/admin/login/?next=/admin/" tabindex="-1" aria-disabled="true">Admin</a>
+          </li>
+        </ul>
+
+          
+
+          <form action="{% url 'logout_user' %}" method="POST">
+            <strong> <a style="color: red;"> {% if user.is_authenticated %}
+             Hello &nbsp;{{ user.username}}&nbsp;&nbsp;
+           </a> </strong>
+               {% csrf_token %}
+           
+               <button class="btn btn-outline-success" type="submit">Logout</button>
+           
+             
+             {% else %}
+             
+           
+           
+             {% endif %}
+           </form>  &nbsp;&nbsp;
+
+
+          {% endif %}
+
+        </ul>
+
+
+
+        
+         
+        {% comment %} 
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li> <a href= "{% url 'logout_user' %}" class="btn btn-primary">Logout </a></li>
+              
+              
+          </li>
+        
+        
+        
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> {% endcomment %}
+      </div>
+    </div>
+  </nav>
+
+
+ 
+

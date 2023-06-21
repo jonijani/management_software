@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Accessories dashboard page </h3>
+
+Total Mobile Accessories actuall cost : <strong> £ {{Total_mobile_acc_cost}} </strong> -- Retail worth <strong>  £ {{Total_mobile_acc_retail_worth_list}} </strong> ---Quantity : {{mobile_acc_count}}
+<br> 
+Total laptop accessories actuall cost :  <strong> £ {{total_laptop_acc_cost_list}}  </strong> -- Retail worth <strong>  £ {{total_laptop_acc_retail_worth_list}} </strong>  --- Quantity : {{laptop_acc_cost_count}}
+<br>
+Total tablet accessories cost : <strong> £ {{Total_tablet_acc_cost_list}}  </strong> -- Retail worth <strong>  £ {{total_tablet_acc_retail_cost_list}} </strong>  --- Quantity : {{tablet_acc_cost_count}}
+<br>
+<br>
+Net Accessories cost : <strong> £ {{accessories_net_cost}}  </strong> -- Retail worth <strong>  £ {{accessories_retail_worth}} </strong>   --- Quantity : {{total_quantity}}
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>client little info  page for search clients</h3>
+
+    <table class="table table-hover " >
+        <thead>
+          <tr>
+            <th >  Client ID</th>
+            <th >First Name</th>
+            <th >Last Name</th>
+            <th >Phone </th>
+            <th >landline </th>
+            <th >Email </th>
+            <th >Address </th>
+            <th >Postcode</th>
+          </tr>
+        </thead>
+    
+        
+        <tbody>
+            {% for search_clients in search_clients_context %}
+          <tr>
+            <td>  {{ search_clients.id }} </td>
+            <td>{{search_clients.first_name}}</td>
+            <td>{{search_clients.last_name}}</td>
+            <td>{{search_clients.phone}}</td>
+            <td>{{search_clients.landline}}</td>
+            <td>{{search_clients.email}}</td>
+            <td>{{search_clients.address}}</td>
+            <td>{{search_clients.postcode}}</td>
+            
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+        
+      </table>
+      
+      
+
+
+{% endblock %}

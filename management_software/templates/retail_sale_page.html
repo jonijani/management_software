@@ -1,0 +1,84 @@
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>retail_sale_page.html</h3>
+    <p>
+    
+    <strong> Add Accessories </strong>
+<div class="table table-striped">
+<form class="d-flex" method="GET" action="{% url 'add_sale' %}" style="align-self: center;">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search Accessories" aria-label="Search" name="searched">
+    <button class="btn btn-outline-success" type="submit">search</button>
+  </form>
+
+  
+      
+      </table>
+
+      <table class="table table-hover " >
+        {% comment %} <thead>
+          <tr>
+            <th >  Accessory ID</th>
+            <th >Model</th>
+            <th >Name</th>
+            <th >Price </th>
+            
+          </tr>
+        </thead> {% endcomment %}
+    
+        
+        <tbody>
+            {% for result_acc in result_acce_context %}
+          <tr>
+            
+              <td>{{result_acc.id}}</td>
+              <td>{{result_acc.model}}</td>
+              <td>{{result_acc.acce_name}}</td>
+              <td>{{result_acc.retail_price}}</td>
+              <td><a href="{% url 'acce_cart' result_acc.id %}">Add to cart</a></td>
+              
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+        
+      </table>
+    </div>
+
+    
+    </p>
+
+
+
+    <div class="col border border-dark bg-light col-md-4 col-mb-4 ">
+        
+
+        Job id : {{j_deliver_context.id}} <br>
+        IMEI : {{j_deliver_context.imei}} <br>
+        Make : {{j_deliver_context.make}} <br>
+        Model : {{j_deliver_context.model}} <br>
+       <p name="Cost_name" id="cost_id"> Cost: £ {{j_deliver_context.cost}} <br><br></p>
+       {% if j_deliver_context.customer.client_type == 'corporate' %}
+       <p name="Cost_name" id="cost_id"> VAT: £ {{j_deliver_context.get_vat}} <br><br></p>
+        {% endif %} 
+       <form method="POST" action="#">
+           {% csrf_token %}
+           <input type="text" style="display: none;" value={{j_deliver_context.cost}} name="cost_name"> 
+       <button id="mybtn" class="btn btn-primary" > Add to cart</button>
+       
+       </form>
+    </div>
+<br>
+
+   
+      <br>
+      
+
+
+      
+
+
+{% endblock %}

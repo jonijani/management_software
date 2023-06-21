@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Job created page </h3>
+{% csrf_token %}
+
+
+
+<h3>{{message}}</h3>
+
+<table class="table" >
+    <thead>
+      <tr>
+        <th >Job ID</th>
+        
+        <th >Make</th>
+        <th >model</th>
+        <th >IMEI</th>
+        <th >Fault </th>
+        <th > Cost</th>
+        <th >created on </th>
+        <th >created by </th>
+      </tr>
+    </thead>
+
+    
+    <tbody>
+    
+        
+        
+      <tr>
+          {% comment %} <a href url is diverted to job detail page > {% endcomment %}
+        <td> <a href="{% url 'job_detail_page' job_created_context.id %}"> {{ job_created_context.id }} </a></td> 
+        <td>{{job_created_context.make}}</td>
+        <td>{{job_created_context.model}}</td>
+        <td>{{job_created_context.imei}}</td>
+        <td>{{job_created_context.fault}}</td>
+        <td>{{job_created_context.cost}}</td>
+        <td>{{job_created_context.created_date}}</td>
+        <td>{{job_created_context.created_by}}</td>
+        
+      </tr>
+     
+
+   
+    
+  </table>
+
+
+
+
+
+
+
+
+{% endblock %}

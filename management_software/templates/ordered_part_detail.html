@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Ordered parts detail page </h3>
+
+{{ordered_part_context.id}}
+
+<table>
+
+   
+    
+    <tr>
+        <td>Request Part ID :</td>
+        <td> {{ parts_requested_context.id }}</td>
+    </tr>
+
+
+    <tr>
+        <td>Related JOB ID  :</td>
+        <td><a href="#"> {{ parts_requested_context.requested_parts_ordered.job.id }} </a> </td>
+    </tr>
+
+    
+    <form method="POST" action="{% url 'ordered_parts_arrived' parts_requested_context.id %}">
+        {% csrf_token %}
+     <tr>
+        <div  >
+
+            <td>Device  :</td>
+            <!-- <td> {{ parts_requested_context.requested_parts_ordered.devices.devices}}  </td> -->
+          <td>  <input type="text"  value="{{ parts_requested_context.requested_parts_ordered.devices.devices}}" name = "device_name"  > </td> 
+    </tr>
+        </div>
+
+
+
+    <tr>
+        <div >
+            <td>Make  :</td>
+            <!-- <td> {{ parts_requested_context.requested_parts_ordered.make.make}}  </td> -->
+            <td>  <input type="text"  value="{{ parts_requested_context.requested_parts_ordered.make.make}}" name = "make_name"  > </td> 
+
+        </div>
+    </tr>
+
+
+
+    <tr>
+        <td>Model  :</td>
+        <!-- <td> {{ parts_requested_context.requested_parts_ordered.model.model}}  </td> -->
+        <td>  <input type="text"  value= "{{ parts_requested_context.requested_parts_ordered.model.model}}" name = "model_name"  > </td> 
+
+    </tr>
+
+
+
+
+    <tr>
+        <td>Part Name :</td>
+        <!-- <td> {{ parts_requested_context.requested_parts_ordered.part_name }}</td> -->
+        <td>  <input type="text"  value= "{{ parts_requested_context.requested_parts_ordered.part_name }}" name = "part_name"  > </td> 
+
+    </tr>
+
+
+
+    <tr>
+        <td>Colour  :</td>
+        <!-- <td> {{ parts_requested_context.requested_parts_ordered.part_colour.colour}}  </td> -->
+        <td>  <input type="text"  value= "{{ parts_requested_context.requested_parts_ordered.part_colour.colour}}" name = "color_name"  > </td> 
+
+    </tr>
+
+
+
+    <tr>
+        <td>Supplier  :</td>
+        <!-- <td> {{ parts_requested_context.requested_parts_ordered.supplier.supplier}}  </td> -->
+        <td>  <input type="text"  value= "{{ parts_requested_context.requested_parts_ordered.supplier.supplier}}" name = "supplier_name"  > </td> 
+
+    </tr>
+
+
+
+    <tr>
+        <td>Quantity  :</td>
+        <!-- <td> {{ parts_requested_context.requested_parts_ordered.quantity}}  </td> -->
+        <td>  <input type="text"  value= "{{ parts_requested_context.requested_parts_ordered.quantity}}" name = "quantity_name"  > </td> 
+
+    </tr>
+
+   
+
+    <tr>
+        <td>Part Cost :</td>
+        <!-- <td> {{ parts_requested_context.requested_parts_ordered.buying_cost }}</td> -->
+        <td>  <input type="text"  value= "{{ parts_requested_context.requested_parts_ordered.buying_cost }}" name = "cost_name"  > </td> 
+
+    </tr>
+    
+
+    <tr>
+        <td>Notes at ordered :</td>
+        <!-- <td> {{ parts_requested_context.requested_parts_ordered.part_description }}</td> -->
+        <td>  <input type="text"  value= "{{ parts_requested_context.requested_parts_ordered.part_description }}" name = "ordered_notes_name"  > </td> 
+
+    </tr>
+
+    <tr>
+        <td>Part Status :</td>
+        <!-- <td> {{ parts_requested_context.requested_parts_ordered.part_status }}</td> -->
+        <td>  <input type="text"  value= "{{ parts_requested_context.requested_parts_ordered.part_status }}" name = "part_status_name"  > </td> 
+
+    </tr>
+
+    <tr>
+        <td>User  :</td>
+        <td> {{ parts_requested_context.created_by}}  </td>
+    </tr>
+
+    <tr>
+        <td>Time  :</td>
+        <td> {{ parts_requested_context.created_date}}  </td>
+    </tr> 
+    
+        
+
+            
+
+            <!-- <tr>
+                <td>Comments :</td>
+                <td><textarea name = "part_order_comments"   class="form-control" id="descrition_id" > </textarea></td>
+            </tr> -->
+
+            <tr>
+                <td style="color: red;">Select Part Available !:</td>
+                <td>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label"><strong> </strong></label>
+                        <input required list="part_status" name = "part_status_arrived_name" class="form-control" id="part_status_id" >
+                        <datalist id="part_status" >
+                          {% for part_status in part_status_context %}
+                          <option value="{{part_status.p_status}}"> {{part_status.p_status}} </option>
+                    
+                          {% endfor %}
+                          
+                      </datalist>
+                      </div>
+                    
+                </td>
+
+                </tr>
+
+            <tr>
+                <td>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </td>
+            </tr>
+
+
+            
+    </form>
+   
+</table>
+
+
+
+
+{% endblock %}

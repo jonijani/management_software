@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>Update  client details </h3>
+      <form method="POST" action="{% url 'Client_detail_info' customer_context.id %}">
+        {% csrf_token %}
+        <div class="mb-3 ">
+          <label for="exampleInputEmail1" class="form-label">First name</label>
+          <input type="text"  value= "{{customer_context.first_name}}" name = "first_name" class="form-control" id="exampleInputEmail1"  >
+          
+        </div>
+      
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Last name</label>
+          <input type="text" value= "{{customer_context.last_name}}" name = "last_name"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Phone</label>
+          <input type="text" value= "{{customer_context.phone}}" name = "phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Landline</label>
+          <input type="text"  value= "{{customer_context.landline}}" name = "landline" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email"  value= "{{customer_context.email}}" name = "email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Address</label>
+            <textarea class="form-control" value= "{{customer_context.address}}" name = "address"id="exampleInputEmail1" aria-describedby="emailHelp"></textarea>
+            
+          </div>
+          
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Postcode</label>
+            <input type="text" value= "{{customer_context.postcode}}" name = "postcode" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
+
+
+{% endblock %}

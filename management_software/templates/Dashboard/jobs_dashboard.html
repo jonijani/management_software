@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>JOBS dashboard page </h3>
+<br>
+  Total worth of pending jobs : <strong> £ {{Total_pending_jobs}} </strong> --- Total pending job : {{pending_jobs_count}}
+<br>
+Total completed jobs : <strong> £ {{Total_complete_jobs}} </strong> --- Total complete jobs : {{completed_jobs_count}}
+<br>
+Total worth of jobs waiting for parts :  <strong> £ {{Total_waiting_for_parts_list}} </strong> --- Number of jobs waiting for parts : {{waiting_for_parts_jobs_count}}
+<br> 
+Total Waiting for approval jobs : <strong> £ {{Total_waiting_for_approval_list}} </strong>  --- Number of jobs waiting for parts : {{waiting_for_approval_counts}}
+
+
+
+
+ 
+
+{% endblock %}

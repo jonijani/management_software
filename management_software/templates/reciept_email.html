@@ -1,0 +1,88 @@
+
+
+
+{% for reciept in reciept %}
+<div class="col col-md-4 ">
+{% comment %} first reciept is in JOB ID line is varibale from loop and other reciept from table colum/fields {% endcomment %}
+<p><h3><strong>Job ID :{{reciept.reciept.id}}</strong></h3></p>
+<p>Reciept NO : {{reciept.id}}</p>
+<p>Device :{{reciept.reciept.device}}</p>
+<p>Model :{{reciept.reciept.model}}</p>
+<p>Make :{{reciept.reciept.make}}</p>
+<p>Fault :{{reciept.reciept.fault}}</p>
+<p>IMEI  :{{reciept.reciept.imei}}</p>
+<p>Date :{{reciept.reciept.created_date}}</p>
+<p>User : {{reciept.reciept.created_by}}</p>
+
+
+
+<p> customer Name :{{reciept.reciept.customer.full_name}}</p>
+<p>Phone : {{reciept.reciept.customer.phone}}</p>
+<p>Email :{{reciept.reciept.customer.email}}</p>
+<p>Description :{{reciept.reciept.description}}</p>
+
+<p><strong>Cost :{{reciept.reciept.cost}} {{reciept.reciept.payment_status}}</strong></p>
+<p>All of our screens come with a LIFETIME
+    WARRANTY.
+    Should you experience any technical problems
+    with your new screen we'd be happy to resolve
+    this under our warranty. If this is not possible
+    within a reasonable time frame we will offer a
+    refund.
+    For all other component-based repairs we offer a
+    12-month warranty - if a part we have used
+    becomes faulty, we will replace the same part
+    unless there is evidence of physical damage.
+    Components used in devices which have been
+    liquid damaged come with a 3-month warranty
+    but please note that this is a general guideline
+    and is subject to the condition of the device.
+    No refunds are available for network unlockings
+    which have been submitted, so please confirm
+    the details before completing the booking.
+    fone doctors can not be held responsible for any
+    loss of data. As such, we recommend a full data
+    back-up on all handsets. Please note that this
+    does not apply to phones booked in specifically
+    for data recovery. This does not affect your
+    statutory rights.
+    All phones should be checked to ensure they are
+    not barred by the network. If work is carried out
+    on a handset i.e repair and / or unlocking and the
+    london,UK
+    00000000000
+    WhatsApp 0000000000000
+    phone is subsequently found to be barred, you
+    are still liable to pay for the work undertaken.
+    In order to remain true to our No-fix no-fee policy,
+    if a handset cannot be fixed we will return it
+    without charging for our repair efforts. Where
+    postage is necessary, appropriate charges will
+    apply. However, if a device is beyond repair, we
+    can also dispose of it for you in an
+    environmentally friendly manner.
+</p>
+
+<p>Address : London , UK</p>
+
+
+
+
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

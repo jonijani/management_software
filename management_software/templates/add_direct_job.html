@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Add job page</h3>
+
+
+<form method="POST" action= "{% url 'add_direct_job' customers.id %}">
+  {% csrf_token %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>customer: {{customers.full_name}}</h2>
+      <input type="hidden" value="{{customers.id}}" name="customer">
+        <!-- Radio button for devices -->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label" ><strong>Select Device Type </strong></label>
+
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            {% for device in device_context %}
+            
+            <input type="radio" class="btn-check" onclick=make_dropdown_{{device.devices}}() name="device_mobile" value="{{device.devices}}" id="{{device.get_id}}" autocomplete="off" >
+            {% comment %} line 31 id="{{device.get_id}}" get_id came from models to shpw specific id for device  {% endcomment %}
+            <!--line 30 id should be unique when we pass variables in the id it wil get uniqe name -->
+            
+
+            <label class="btn btn-outline-primary" for = "{{device.get_id}}" >{{device.devices}}</label>
+            {% comment %} line 40 my_dropdown_{{device.devices}}  device.devices will pick each button on forloop{% endcomment %}
+            <!-- in line 49 first comes from for loop variable and 2nd make comes from models fields/column -->
+            <script>
+              function make_dropdown_{{device.devices}}(){  
+                var id = document.getElementById('make_list');
+                
+                id.innerHTML -= '<option>Select Make</option>{% for make in make_context %}{% if make.device.id == 6 %}<option value="{{make.make}}"></option>{% endif %}{% endfor %}'
+
+                id.innerHTML += '<option>Select Make</option>{% for make in make_context %}{% if make.device.id == device.get_id %}<option value="{{make.make}}"></option>{% endif %}{% endfor %}'
+                
+                
+                
+              
+              }
+            
+            
+            </script>
+            {% endfor %}
+          
+           
+          </div> 
+          
+        </div>
+
+        <!-- dropdown menu for Make and this div s  -->
+        <div class="mb-3" id="mobile_div" >
+          <label for="exampleInputEmail1" class="form-label"><strong>Make </strong> {{make.make_device.all }}</label>
+          <!--name always used in views.py functions and ID always used in front end and html,javascripts -->
+          <input list="make_list" name = "make" class="form-control" id="make_mobile" aria-describedby="emailHelp">
+          <datalist id="make_list" >
+            
+            
+        </datalist>
+
+
+      </div>
+      
+      
+       
+
+        {% comment %} Model dropdown starts here  {% endcomment %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"><strong> Model </strong></label>
+          <!-- {% comment %} name always used in views.py functions and ID always used in front end and html {% endcomment %} -->
+          <input list="model_list" name = "model" class="form-control" id="model" aria-describedby="emailHelp">
+          <datalist id="model_list" >
+            {% for model in model_context %}
+            <option value="{{model.model}}"> {{model.model}} </option>
+
+            {% endfor %}
+            
+        </datalist>
+
+
+
+        </div>
+
+
+
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"> <strong> IMEI </strong></label>
+          <input type="text" name = "imei" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+          
+          
+        </div>
+
+        <!-- faults field starts here -->
+        <h6> <strong> Faults </strong></h6>
+        <div class="container ">
+          <div class="row">
+            {% for fault in fault_context %}
+            <div class="col">
+        
+        <div class="form-check mb-4 col-md-6">
+          <input class="form-check-input" name= "faults" type="checkbox" value="{{ fault.fault }}" id="faults_{{ fault.fault }}">
+          <label class="form-check-label" for="faults_{{ fault.fault }}">
+            {{ fault.fault }}
+          </label>
+        </div>
+      </div>
+      {% endfor %}
+          
+          </div>
+        </div>
+
+        <!-- descrition starts here  -->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"> <strong> Description </strong></label>
+          <textarea name = "description" class="form-control" id="descrition_id" ></textarea>
+
+        </div>
+
+
+        <!-- Accessories field starts here  -->
+        <h6><strong> Accessories </strong></h6>
+        
+        
+        <div class="container ">
+          <div class="row">
+            {% for accessories in accessories_context %}
+            <div class="col">
+        
+        <div class="form-check mb-4 col-md-6">
+          <input class="form-check-input" name="accessories" type="checkbox" value="{{ accessories.accessories }}" id="accessories_{{ accessories.accessories }}">
+          <label class="form-check-label" for="accessories_{{ accessories.accessories }}">
+            {{ accessories.accessories }}
+          </label>
+        </div>
+      </div>
+      {% endfor %}
+          
+          </div>
+        </div>
+
+
+         <!-- Sale Items field starts here  -->
+         <h6><strong> Sale items </strong></h6>
+        
+        
+         <div class="container ">
+           <div class="row">
+             {% for sale_item in sale_item_context %}
+             <div class="col">
+         
+         <div class="form-check mb-4 col-md-6">
+           <input class="form-check-input" name="sale_item" type="checkbox" value="{{ sale_item.sale_item }}" id="sale_item_{{ sale_item.sale_item }}">
+           <label class="form-check-label" for="sale_item_{{ sale_item.sale_item }}">
+            {{ sale_item.sale_item }}
+           </label>
+         </div>
+       </div>
+       {% endfor %}
+           
+           </div>
+         </div>
+
+        <!-- Passcode field starts here  -->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"> <strong> Passcode </strong></label>
+          <input type="text" name = "passcode" class="form-control" id="passcode" >
+
+          
+          
+        </div>
+
+        
+
+
+
+
+        <!-- Network field starts here  -->
+        <div class="mb-3"  >
+          
+          <label for="network_list" class="form-label"> <strong> Network </strong></label>
+          <!--name always used in views.py functions and ID always used in front end and html,javascripts -->
+          <input list="network_list" name = "network" class="form-control" id="network_list_id" >
+          <datalist id="network_list" >
+            <option value="select network" ></option>
+            {% for network in network_context %}
+            <option value="{{network.network}}"></option>
+
+            {% endfor %}
+            
+        </datalist>
+
+
+      </div>
+
+
+
+      <!-- Passcode Cost starts here  -->
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"> <strong> Cost </strong></label>
+        <input type="number" name = "cost" class="form-control" id="cost" >
+
+        
+        
+      </div>
+
+     
+
+      <!-- job status field starts here -->
+      <div class="mb-3"  >
+          
+        <label for="job_status_list" class="form-label"> <strong> Job Status </strong></label>
+        <input list="job_status_list" name = "job_status" class="form-control" id="job_status_id" >
+        <datalist id="job_status_list" >
+          <option></option>
+          {% for job_status in job_status_context %}
+          <option value="{{job_status.job_status}}"></option>
+
+          {% endfor %}
+          
+      </datalist>
+
+
+    </div>
+
+
+
+    <!-- Passcode ETA starts here  -->
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label"> <strong>ETA </strong></label>
+      <input type="datetime-local" name = "eta" class="form-control" id="eta_id" >
+
+      
+      
+    </div>
+
+
+
+    <!-- Payment status field starts here -->
+    <!-- <div class="mb-3"  >
+          
+      <label for="payment_status_list" class="form-label">Payment Status</label>
+      <input list="payment_status_list" name = "payment_status" class="form-control" id="payment_status_id" >
+      <datalist id="payment_status_list" >
+        <option value="Payment status" ></option>
+        {% for payment in payment_status_context %}
+        <option value="{{payment.payment_status}}"></option>
+
+        {% endfor %}
+        
+    </datalist>
+
+
+  </div> -->
+  <div class="mb-3"  >
+          
+    <label for="payment_status_list" class="form-label"> <strong> Payment Status </strong> </label>
+    <input list="payment_status_list" name = "payment_status" class="form-control" id="payment_status_id" >
+    <datalist id="payment_status_list" >
+      
+      <option value="PAID" ></option>
+      <option value="UNPAID"></option>
+      <option value="CREDIT NOTE"></option>
+      <option value="REFUND"></option>
+      
+  </datalist>
+
+
+</div> 
+
+
+
+        
+
+
+
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
+
+
+
+
+{% endblock %}
